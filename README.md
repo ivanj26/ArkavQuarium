@@ -1,3 +1,7 @@
+LINK PENTING!
+https://www.geeksforgeeks.org/linked-list-set-1-introduction/ Linked List Tutorial
+
+
 ArkavQuarium
 
 Deskripsi ArkavQuarium

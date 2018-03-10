@@ -13,7 +13,7 @@ class Snail{
         Snail();
         ~Snail();
         Coin* getCoins()const; // (MARK)
-        void insertCoin(Coin&); //Aggregation (MARK)
+        void insertCoin(const Coin*); //Aggregation (MARK)
         /* KASUS I  = Kalau ada koin dia didekatnya, dia gerak ke lokasi koin
          * KASUS II = Kalau ga ada koin, dia diem
         */

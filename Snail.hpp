@@ -21,7 +21,7 @@ class Snail{
     
         /*Get & Set currentCoin*/
         void setCurrentCoin(int);
-        int getCurrentCoin()const;
+        Coin* getCurrentCoin()const;
 };
 
 #endif

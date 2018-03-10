@@ -20,10 +20,10 @@ class LinkedList{
         void setCurrentSize(int);
         int getCurrentSize(int);
 
-        void find(T);
-        void add(T);
+        int find(T*);
+        void add(T*);
         void remove(T*);
-        int getIndex() const;
+        T* getIndex(int) const;
 };
 
 #endif

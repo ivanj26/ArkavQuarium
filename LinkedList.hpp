@@ -23,7 +23,7 @@ class LinkedList{
         int find(T*);
         void add(T*);
         void remove(T*);
-        T* getIndex(int) const;
+        T* getIndex(int);
 };
 
 #endif

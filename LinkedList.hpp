@@ -18,7 +18,7 @@ class LinkedList{
 
         /*Get & Set currenSize*/
         void setCurrentSize(int);
-        int getCurrentSize(int);
+        int getCurrentSize(int)const;
 
         int find(T*);
         void add(T*);

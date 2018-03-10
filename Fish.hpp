@@ -24,7 +24,7 @@ class Fish{
         void Move(int);         // param1 = konstanta MOVE atau directionnya
 
         /*Get & Set Location*/
-        int getX()const;
+        int getX()const;        //Nilai X dan Y didapat darimana? gak ada data member untuk X dan Y.
         int getY()const;
         void setX(int);
         void setY(int);

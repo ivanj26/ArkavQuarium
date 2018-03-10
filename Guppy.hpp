@@ -22,7 +22,7 @@ class Guppy : public Fish{
         int getGrowLevel();
         void setGrowLevel(int);
 
-        Food findNearestFoodOrFish(); //BUat nyari makan
+        Food findNearestFoodOrFish(); //(MARK) Buat nyari makan
 
 };
 

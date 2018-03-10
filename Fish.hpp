@@ -12,36 +12,36 @@ using namespace std;
 
 class Fish{
     private:
-        string directionTo;
+        string directionTo;     // Lagi ngadep kemana
         Location location;
-        bool isFull;
-        int intervalToDie; //deadline dia harus nyari makan
-        int intervalFull; //dia kenyang berapa lama
+        bool isFull;            // Lagi kenyang(?)
+        int intervalToDie;      // Batas waktu dia harus nyari makan
+        int intervalFull;       // Batas waktu dia kenyang berapa lama
     public:
         Fish();
-        virtual Coin generateCoin() = 0; //override
-        void Eat(); //overloading
-        void Move(int); //param1 = konstanta MOVE
+        virtual Coin generateCoin() = 0; //Method Override, didefinisikan di class turunannya
+        void Eat();             // Method Overloading, dia makannya makan apa(?) definisiin saat di class turunannya
+        void Move(int);         // param1 = konstanta MOVE atau directionnya
 
         /*Get & Set Location*/
-        int getX();
-        int getY();
+        int getX()const;
+        int getY()const;
         void setX(int);
         void setY(int);
 
         /*Get & Set isFull*/
         void setIsFull(bool);
-        bool getIsFull();
+        bool getIsFull() const;
 
 
         /*Get & Set Interval*/
-        int getIntervalFull();
+        int getIntervalFull() const;
         void resetIntervalFull();
-        int getIntervalToDie();
+        int getIntervalToDie() const;
         void resetIntervalToDie();
 
-        void printFish(); //ngikutin arah
-        void findNearestFoodOrFish(); //Buat nyari makan, overloading
+        void printFish();             //Print si ikan, ngadepnya ngikutin variable string directionTo
+        void findNearestFoodOrFish(); //(MARK) Buat nyari makan, overloading
 };
 
 #endif

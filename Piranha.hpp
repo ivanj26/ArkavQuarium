@@ -9,10 +9,10 @@ class Piranha : public Fish{
         
     public:
         Piranha();
-        Coin generateCoin(); //override
-        void Eat(Guppy); //overloading
+        Coin generateCoin();    //Override dari class Fish
+        void Eat(Guppy);        //Overloading dari class Fish
 
-        Guppy findNearestFoodOrFish(); //BUat nyari makan
+        Guppy findNearestFoodOrFish(); //(MARK) Buat nyari makan berupa object dari class Guppy
 };
 
 #endif

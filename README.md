@@ -1,6 +1,7 @@
 # ArkavQuarium
 
 <b>LINK PENTING</b> 
+
 https://www.codementor.io/codementorteam/a-comprehensive-guide-to-implementation-of-singly-linked-list-using-c_plus_plus-ondlm5azr <i> Ini Tutorial LinkedList </i>
 
 1. Akuarium

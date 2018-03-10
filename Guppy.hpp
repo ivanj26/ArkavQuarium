@@ -16,10 +16,10 @@ class Guppy : public Fish{
 
         /*Get & Set*/
         void setNbFood(int);
-        int getNbFood();
+        int getNbFood() const;
 
         /*Get & Set*/
-        int getGrowLevel();
+        int getGrowLevel() const;
         void setGrowLevel(int);
 
         Food findNearestFoodOrFish(); //(MARK) Buat nyari makan

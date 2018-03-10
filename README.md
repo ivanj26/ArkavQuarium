@@ -1,5 +1,5 @@
 LINK PENTING!
-https://www.geeksforgeeks.org/linked-list-set-1-introduction/ Linked List Tutorial
+https://www.codementor.io/codementorteam/a-comprehensive-guide-to-implementation-of-singly-linked-list-using-c_plus_plus-ondlm5azrLinked List Tutorial
 
 
 ArkavQuarium

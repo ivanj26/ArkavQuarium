@@ -29,7 +29,7 @@ class Coin{
 
         /*Get & Set isReachBottom*/
         void setIsReachBottom(bool);
-        bool getIsReachBottom(bool);
+        bool getIsReachBottom(bool) const;
 };
 
 #endif

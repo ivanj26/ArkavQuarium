@@ -18,12 +18,12 @@ class LinkedList{
 
         /*Get & Set currenSize*/
         void setCurrentSize(int);
-        int getCurrentSize(int);
+        int getCurrentSize(int)const;
 
-        void find(T);
-        void add(T);
+        int find(T*);
+        void add(T*);
         void remove(T*);
-        int getIndex() const;
+        T* getIndex(int);
 };
 
 #endif

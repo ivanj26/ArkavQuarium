@@ -7,7 +7,7 @@
 class Snail{
     private:
         Location location;
-        int currentCoin; //Banyaknya koin sekarang yang ditampung Snail
+        int nbCoin; //Banyaknya koin sekarang yang ditampung Snail
         Coin* coin;     //Buat nyimpen koin(?) (MARK)
     public:
         Snail();
@@ -20,8 +20,8 @@ class Snail{
         void Move(); 
     
         /*Get & Set currentCoin*/
-        void setCurrentCoin(int);
-        int getCurrentCoin()const;
+        void setNbCoin(int);
+        int getNbCoin()const;
 };
 
 #endif

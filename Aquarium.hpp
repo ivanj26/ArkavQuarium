@@ -19,9 +19,6 @@ class Aquarium{
         LinkedList<Food> Foods;
     public:
         Aquarium();
-        void setFish(Fish);// add(Fish)
-        void setFood(Food);
-        void setCoin(Coin);
         Snail getSnail();
         LinkedList<Fish> getFishes();
         LinkedList<Coin> getCoins();

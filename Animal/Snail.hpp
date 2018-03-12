@@ -7,21 +7,25 @@
 class Snail {
     private:
         Location location;
-        int currentCoin; //Banyaknya koin sekarang yang ditampung Snail
-        Coin* coin;     //Buat nyimpen koin(?) (MARK)
+        int amountCoin; //Banyaknya koin sekarang yang ditampung Snail
     public:
         Snail();
         ~Snail();
         Snail& operator=(const Snail&);//4 sekawan, untuk operator assignment
-        Coin* getCoins()const; //(MARK)
-        void insertCoin(const Coin*); //Aggregation (MARK)
+        void insertCoin(Coin);
         /* KASUS I  = Kalau ada koin dia didekatnya, dia gerak ke lokasi koin
          * KASUS II = Kalau ga ada koin, dia diem
         */
-        void Move(); 
+        void Move(int); //L or R 
+
+        /*Get & Set*/
+        void setX(int);
+        int getX()const;
+        void setY(int);
+        int getY()const;
     
-        /*Get & Set currentCoin*/
-        void setCurrentCoin(int);
-        int getCurrentCoin()const;
+        /*Get & Set amountCoin*/
+        int getAmountCoin()const;
+        void findNearestCoin(LinkedList<Coin>);
 };
 #endif

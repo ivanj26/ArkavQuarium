@@ -17,8 +17,9 @@ class Fish{
         string directionTo;     // Lagi ngadep kemana
         Location location;
         bool isFull;            // Lagi kenyang(?)
-        int intervalToDie;      // Batas waktu dia harus nyari makan
-        int intervalFull;       // Batas waktu dia kenyang berapa lama
+        long hungerTime;
+        const int intervalToDie;      // Batas waktu dia harus nyari makan
+        const int intervalFull;       // Batas waktu dia kenyang berapa lama
     public:
         Fish();
         virtual Coin generateCoin() = 0; //Method Override, didefinisikan di class turunannya
@@ -35,12 +36,9 @@ class Fish{
         void setIsFull(bool);
         bool getIsFull() const;
 
-
-        /*Get & Set Interval*/
-        int getIntervalFull() const;
-        void resetIntervalFull();
-        int getIntervalToDie() const;
-        void resetIntervalToDie();
+        /*Get & Set LifeTime*/
+        void setHungerTime(long);
+        long getHungerTime();
 
         void printFish();             //Print si ikan, ngadepnya ngikutin variable string directionTo
         void findNearestFoodOrFish(); //(MARK) Buat nyari makan, overloading

@@ -20,7 +20,7 @@ class Food{
 
         /*Get & Set isReachBottom*/
         void setIsReachBottom(bool);
-        bool getIsReachBottom(bool);
+        bool getIsReachBottom()const;
 };
 
 #endif

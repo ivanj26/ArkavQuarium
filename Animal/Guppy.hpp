@@ -7,11 +7,14 @@
 
 class Guppy : public Fish{
     private:
+        const int growTo2;
+        const int growTo3;
         int growLevel;
         int nbFood; //udah makan berapa banyak
         const int intervalGenerateCoin;
+        long coinTime;
     public:
-        Guppy();
+        Guppy(); //default constructor untuk isi const growTo2 dan growTo3
         Guppy& operator=(const Guppy&);//4 sekawan, untuk operator assignment
         Coin generateCoin(); //override
         void Eat(Food); //overloading
@@ -21,11 +24,15 @@ class Guppy : public Fish{
         int getNbFood() const;
 
         /*Get & Set*/
+        long getCoinTime();
+        void resetCoinTime();
+
+        /*Get & Set*/
         int getGrowLevel() const;
         void setGrowLevel(int);
 
-        Food findNearestFoodOrFish(); //(MARK) Buat nyari makan
-
+        void findNearestFoodOrFish(LinkedList<Food>); //(MARK) Buat nyari makan
+        /*Euclidean distance r = sqrt(x^2 + y^2)*/
 };
 
 #endif

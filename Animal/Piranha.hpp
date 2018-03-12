@@ -16,13 +16,13 @@ class Piranha : public Fish{
         Piranha();
         Piranha& operator=(const Piranha&); //4 sekawan, untuk operator assignment
         Coin generateCoin();    //Override dari class Fish
-        void Eat(Guppy);        //Overloading dari class Fish
+        void Eat(Guppy&);        //Overloading dari class Fish
         
         /*Get & Set eatGuppyAtLevel*/
         int getEatAtLevel()const;
         void setEatAtLevel(int);
     
-        Guppy findNearestFoodOrFish(); //(MARK) Buat nyari makan berupa object dari class Guppy
+        void findNearestFoodOrFish(LinkedList<Guppy>); //(MARK) Buat nyari makan berupa object dari class Guppy
 };
 
 #endif

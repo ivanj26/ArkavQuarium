@@ -5,8 +5,6 @@
 
 class Coin{
     private:
-        int intervalToGone;
-        bool isReachBottom;  //Udah nyampe paling bawah atau ga?
         int value;          //berapa besar nilai koinnya
         Location location;
     public:
@@ -23,14 +21,6 @@ class Coin{
         int getY() const;
         void setX(int);
         void setY(int);
-
-        /*Get & Set intervalToGone*/
-        void setIntervalToGone(int);
-        int getIntervalToGone() const;
-
-        /*Get & Set isReachBottom*/
-        void setIsReachBottom(bool);
-        bool getIsReachBottom(bool) const;
 };
 
 #endif

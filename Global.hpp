@@ -3,7 +3,6 @@
 
 #define SPEED_COIN_FOOD     1
 #define SPEED_FISH_NORMAL   2
-#define SPEED_FISH_HUNGRY   3
 
 /*  Tipe bentukan Location :
  *  1. x = absis

@@ -22,15 +22,4 @@ struct Location{
  *  4. dst sampai 8 mata angin
 */
 
-enum MOVE{
-    MOVE_N,
-    MOVE_S,
-    MOVE_W,
-    MOVE_E,
-    MOVE_NE,
-    MOVE_SE,
-    MOVE_SW,
-    MOVE_NW
-};
-
 #endif

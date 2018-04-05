@@ -7,7 +7,7 @@ template <class T>
 class LinkedList{
     private:
         int currentSize;
-        Node<T>* Head; 
+        Node<T>* Head;
     public:
         LinkedList();
         ~LinkedList();
@@ -16,7 +16,10 @@ class LinkedList{
 
         /*Get & Set currenSize*/
         void setCurrentSize(int);
-        int getCurrentSize(int)const;
+        int getCurrentSize()const; //MARK (ada kesalahan parameternya, seharusnya tidak ada parameter)
+
+        //MARK (ada penambahan mendapatkan Head)
+        Node<T>* getHead();
 
         int find(T);
         void add(T);

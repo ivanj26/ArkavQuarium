@@ -21,7 +21,7 @@ Coin Guppy::generateCoin(){
             coin.setValue(100);
             coin.setX(location.x);
             coin.setY(location.y);
-        break; 
+        break;
         case 2: //Level 2
             coin.setValue(200);
             coin.setY(location.y);
@@ -37,7 +37,6 @@ Coin Guppy::generateCoin(){
 void Guppy::Eat(Food food){
     if (!food.getIsReachBottom()){
         nbFood++;
-        //lupa hungertime diapain
     }
 }
 
@@ -50,7 +49,7 @@ int Guppy::getNbFood()const{
 }
 
 void Guppy::resetCoinTime(){
-    //lupa implementasinya gmn
+    coinTime = 0;
 }
 
 long Guppy::getCoinTime(){
@@ -65,6 +64,6 @@ void Guppy::setGrowLevel(int growLevel){
     this->growLevel = growLevel;
 }
 
-void findNearestFoodOrFish(LinkedList<Food>){
-
+void findNearestFoodOrFish(LinkedList<Food> foods){
+    
 }

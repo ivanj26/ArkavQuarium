@@ -1,5 +1,5 @@
 # Masukkan semua file cpp Anda
-OBJS = main.cpp oop.cpp ../src/Animal/Fish.cpp
+OBJS = main.cpp oop.cpp ../src/Animal/Fish.cpp ../src/Animal/Guppy.cpp 
 
 CC = g++
 COMPILER_FLAGS = -std=c++11 -Wall -O2

@@ -2,11 +2,23 @@
 #include "../../main/oop.hpp"
 #include <math.h> //include fungsi draw_image
 
-void Fish::Fish():intervalToDie(INTERVAL_TO_DIE), intervalFull(INTERVAL_FULL){}
+Fish::Fish():intervalToDie(INTERVAL_TO_DIE), intervalFull(INTERVAL_FULL){
+  isFull = true;
+  hungerTime = INTERVAL_FULL;
+  // location.x = random
+  // location.y = random
+}
 void Fish::Eat(){}
-void Fish::Move(int degree){
-    location.x += (SPEED_FISH_NORMAL * cos(degree * (M_PI / 180)));
-    location.y += (SPEED_FISH_NORMAL * sin(degree * (M_PI / 180))); 
+void Fish::Move(double degree){
+    //Belum dikali waktu
+	  //MARK -> ukuran guppy (pjg dan lebar) belum tau, harus ada koreksi nilai lagi
+    if ((location.x += (SPEED_FISH_NORMAL *  ((int)cos(degree * (M_PI / 180))))) > SCREEN_WIDTH){
+      location.x = SCREEN_WIDTH;
+    }
+
+    if ((location.y += (SPEED_FISH_NORMAL *  ((int)sin(degree * (M_PI / 180))))) > SCREEN_HEIGHT){
+      location.y = SCREEN_HEIGHT;
+    }
 }
 
 int Fish::getX() const{
@@ -43,7 +55,7 @@ long Fish::getHungerTime(){
 
 void Fish::printFish(){
     //Lokasi gambar masih sembarang
-    draw_image("../main/ikan.png", location.x, location.y);
+    draw_image("../../main/ikan.png", location.x, location.y);
 }
 
 void Fish::findNearestFoodOrFish(){}

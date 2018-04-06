@@ -1,8 +1,6 @@
 #include "../../include/LinkedList/LinkedList.hpp"
 #include <iostream>
 
-using namespace std;
-
 template <class T>
 LinkedList<T>::LinkedList(){
   Head = NULL;

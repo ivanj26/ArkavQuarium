@@ -3,7 +3,7 @@
 
 #define SPEED_COIN_FOOD     1
 #define SPEED_FISH_NORMAL   2
-
+#define PRC_FISH 150
 /*  Tipe bentukan Location :
  *  1. x = absis
  *  2. y = ordinat
@@ -15,7 +15,7 @@ struct Location{
     int y;
 };
 
-/* Penjelasan konstanta MOVE :  
+/* Penjelasan konstanta MOVE :
  *  1. N = NORTH, value = 0;
  *  2. S = SOUTH, value = 1;
  *  3. W = WEST, value = 2;

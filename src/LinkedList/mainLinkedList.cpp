@@ -21,11 +21,17 @@ int main(){
   linkedList->remove(b);
   cout << "Size of linkedList = " << linkedList->getCurrentSize() << endl;
 
+  linkedList->add(a);
+  linkedList->add(c);
+  linkedList->add(c);
+  linkedList->add(b);
+  linkedList->remove(c);
   Node<int> *node = linkedList->getHead();
   for (int i = 0; i < linkedList->getCurrentSize(); i++){
     cout << "Element ke-" << i << " = " << node->getValue() << endl;
     node = node->getNext();
   }
+
 
   delete node;
   delete linkedList;

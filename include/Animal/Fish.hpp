@@ -24,7 +24,7 @@ class Fish{
         Fish();
         virtual Coin generateCoin() = 0; //Method Override, didefinisikan di class turunannya
         void Eat();             // Method Overloading, dia makannya makan apa(?) definisiin saat di class turunannya
-        void Move(int);         // param1 = konstanta MOVE atau directionnya
+        void Move(double);         // MARK perubahan tipe parameter
 
         /*Get & Set Location*/
         int getX()const;

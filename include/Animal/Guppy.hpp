@@ -1,6 +1,8 @@
 #include "Fish.hpp"
 #include "../Food/Food.hpp"
 #include "../Coin/Coin.hpp"
+#include "../LinkedList/Node.hpp"
+#include "../LinkedList/LinkedList.hpp" //MARK lupa nambahin library
 
 #ifndef GUPPY_HPP
 #define GUPPY_HPP
@@ -25,13 +27,13 @@ class Guppy : public Fish{
 
         /*Get & Set*/
         long getCoinTime();
-        void resetCoinTime();
+        void setCoinTime(long); //MARK (ganti isi parameter resetCoinTime jadi setCoinTime)
 
         /*Get & Set*/
         int getGrowLevel() const;
         void setGrowLevel(int);
 
-        void findNearestFoodOrFish(LinkedList<Food>); //(MARK) Buat nyari makan
+        void findNearestFoodOrFish(LinkedList<Food>&); //(MARK) Buat nyari makan
         /*Euclidean distance r = sqrt(x^2 + y^2)*/
 };
 

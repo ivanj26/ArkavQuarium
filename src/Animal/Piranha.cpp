@@ -1,4 +1,5 @@
 #include "../../include/Animal/Piranha.hpp"
+#include "../../main/oop.hpp"
 #include <math.h>
 
 Piranha::Piranha(){
@@ -21,6 +22,10 @@ Coin Piranha::generateCoin(){
     coin.setValue(0);
   }
   return coin;
+}
+
+void Piranha::printFish(){
+  //belum didefinisikan soalnya belum ada gambarnya
 }
 
 void Piranha::Eat(Guppy g){

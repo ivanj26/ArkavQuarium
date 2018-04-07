@@ -6,15 +6,21 @@
 #include <SDL2/SDL_ttf.h>
 #include <set>
 #include <string>
+#include "../include/Global.hpp"
 
-// Pengaturan ukuran layar yang dihasilkan.
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+#include <stdlib.h>
+
 const std::string DIR_ICONS = "../assets/";
 struct MouseLocation{
     int x;
     int y;
 };
+
+/*param 1 = lower bound
+* param 2 = upper bound
+*/
+int generateRandom(int lower, int upper);
+
 
 // Nama font yang digunakan untuk menggambar tulisan.
 const char* const FONT_NAME = "OpenSans-Regular.ttf";

@@ -1,5 +1,4 @@
 #include "../../include/Animal/Fish.hpp"
-#include "../../main/oop.hpp"
 #include <math.h> //include fungsi draw_image
 
 Fish::Fish():intervalToDie(INTERVAL_TO_DIE), intervalFull(INTERVAL_FULL){
@@ -53,9 +52,8 @@ long Fish::getHungerTime(){
     return hungerTime;
 }
 
-void Fish::printFish(){
-    //Lokasi gambar masih sembarang
-    draw_image("../../main/ikan.png", location.x, location.y);
+string Fish::getDirectionTo(){
+  return directionTo;
 }
 
 void Fish::findNearestFoodOrFish(){}

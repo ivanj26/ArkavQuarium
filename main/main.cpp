@@ -1,14 +1,35 @@
 #include "oop.hpp"
-#include "../include/Global.hpp"
-#include <iostream>
 #include <math.h>
+#include "../src/LinkedList/LinkedList.cpp"
+#include "../src/LinkedList/Node.cpp"
 #include <string.h>
 
 using namespace std;
 
 const double speed = 50; // pixels per second
 
-void updateAll(){
+void drawGuppy(int level){
+  // switch (level) {
+  //   case 1:
+  //     draw_image(DIR_ICONS + "guppy_normal_1.png", generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
+  //   break;
+  //   case 2:
+  //     draw_image(DIR_ICONS + "guppy_normal_2.png", generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
+  //   break;
+  //   case 3:
+  //     draw_image(DIR_ICONS + "guppy_normal_3.png",generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
+  //   break;
+  // }
+}
+
+void updateAll(double now, int deltatime){
+  clear_screen();
+  /* Aquarium */
+  draw_image(DIR_ICONS + "aquarium2.jpg", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+
+  /* Setting menu bar*/
+  draw_image(DIR_ICONS + "menubar.gif" , SCREEN_WIDTH / 2, 75 / 2);
+
   update_screen();
 }
 
@@ -18,13 +39,6 @@ int main( int argc, char* args[] )
 
     bool running = true;
     double prevtime = time_since_start();
-
-    /* Aquarium */
-    clear_screen();
-    draw_image(DIR_ICONS + "aquarium2.jpg", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-
-    /* Setting menu bar*/
-    draw_image(DIR_ICONS + "menubar.gif" , SCREEN_WIDTH / 2, 75 / 2);
 
     while (running) {
         double now = time_since_start();
@@ -57,7 +71,7 @@ int main( int argc, char* args[] )
         //         break;
         //     }
         // }
-        updateAll();
+        updateAll(now, deltatime);
     }
 
     close();

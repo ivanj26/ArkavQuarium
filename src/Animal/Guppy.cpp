@@ -1,4 +1,5 @@
 #include "../../include/Animal/Guppy.hpp"
+#include "../../main/oop.hpp"
 #include <math.h>
 
 //Angka masih sembarang
@@ -15,6 +16,19 @@ Guppy& Guppy::operator=(const Guppy& g){
     return *this;
 }
 
+void Guppy::printFish(){
+  switch (growLevel) {
+    case 1:
+      draw_image(DIR_ICONS + "guppy_normal_1.png", generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
+    break;
+    case 2:
+      draw_image(DIR_ICONS + "guppy_normal_2.png", generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
+    break;
+    case 3:
+      draw_image(DIR_ICONS + "guppy_normal_3.png",generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
+    break;
+  }
+}
 
 Coin Guppy::generateCoin(){
     Coin coin;

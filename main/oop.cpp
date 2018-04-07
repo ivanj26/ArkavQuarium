@@ -85,14 +85,19 @@ SDL_Surface* loadSurface( std::string path )
     return loadedSurface;
 }
 
+int generateRandom(int lower, int upper)
+  {
+    return lower + (rand() % (upper - lower + 1));
+  }
+
 void draw_image(std::string filename, int x, int y) {
     if (loadedSurfaces.count(filename) < 1) {
         loadedSurfaces[filename] = loadSurface(filename);
     }
 
     SDL_Surface* s = loadedSurfaces[filename];
-
     SDL_Rect dest;
+
     dest.x = x - s->w/2;
     dest.y = y - s->h/2;
     dest.w = s->w;

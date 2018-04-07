@@ -1,8 +1,6 @@
-#include "../Global.hpp"
 #include "../Coin/Coin.hpp"
 
 #include <string>
-
 
 #ifndef FISH_HPP
 #define FISH_HPP
@@ -40,7 +38,9 @@ class Fish{
         void setHungerTime(long);
         long getHungerTime();
 
-        void printFish();             //Print si ikan, ngadepnya ngikutin variable string directionTo
+        string getDirectionTo();
+
+        virtual void printFish() = 0; //Print si ikan, ngadepnya ngikutin variable string directionTo
         void findNearestFoodOrFish(); //(MARK) Buat nyari makan, overloading
 };
 

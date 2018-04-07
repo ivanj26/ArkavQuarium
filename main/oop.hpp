@@ -10,6 +10,10 @@
 // Pengaturan ukuran layar yang dihasilkan.
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+struct MouseLocation{
+    int x;
+    int y;
+};
 
 // Nama font yang digunakan untuk menggambar tulisan.
 const char* const FONT_NAME = "OpenSans-Regular.ttf";
@@ -62,6 +66,13 @@ const std::set<SDL_Keycode>& get_pressed_keys();
 // Mengembalikan himpunan kode tombol yang baru mulai ditekan pada saat
 // handle_input() terakhir dipanggil.
 const std::set<SDL_Keycode>& get_tapped_keys();
+
+// Mouse event + mouse.x + mouse.y
+const Uint8& get_mouse_clicks();
+
+const int& get_mouse_x();
+
+const int& get_mouse_y();
 
 // ---------------------------------- WAKTU ----------------------------------
 

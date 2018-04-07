@@ -20,6 +20,10 @@ SDL_Window* sdlWindow;
 std::map<std::string, SDL_Surface*> loadedSurfaces;
 std::map<int, TTF_Font*> loadedFontSizes;
 SDL_Surface* gScreenSurface = NULL;
+MouseLocation mouseLocation;
+bool quit = false;
+std::set<SDL_Keycode> tappedKeys;
+Uint8 mouseClickKeys;
 
 bool init()
 {
@@ -120,32 +124,46 @@ void update_screen() {
     SDL_UpdateWindowSurface(sdlWindow);
 }
 
-bool quit = false;
-std::set<SDL_Keycode> pressedKeys;
-std::set<SDL_Keycode> tappedKeys;
-
 void handle_input() {
     SDL_Event e;
     if (!tappedKeys.empty()) tappedKeys.clear();
     while( SDL_PollEvent( &e ) != 0 )
-        {
-            if ( e.type == SDL_QUIT ) {
-                quit = true;
-            } else if (e.type == SDL_KEYDOWN && !e.key.repeat) {
-                pressedKeys.insert(e.key.keysym.sym);
-                tappedKeys.insert(e.key.keysym.sym);
-            } else if (e.type == SDL_KEYUP) {
-                pressedKeys.erase(e.key.keysym.sym);
-            }
-        }
+    {
+      switch (e.type) {
+        case SDL_QUIT:
+          quit = true;
+        break;
+        case SDL_KEYDOWN:
+          tappedKeys.insert(e.key.keysym.sym);
+        break;
+        case SDL_MOUSEBUTTONDOWN:
+          mouseClickKeys = e.button.button;
+          mouseLocation.x = e.button.x;
+          mouseLocation.y = e.button.y;
+        break;
+        case SDL_MOUSEBUTTONUP:
+          mouseLocation.x = -1;
+          mouseLocation.y = -1;
+          mouseClickKeys = -127;
+        break;
+      }
+    }
 }
 
 bool quit_pressed() {
     return quit;
 }
 
-const std::set<SDL_Keycode>& get_pressed_keys() {
-    return pressedKeys;
+const Uint8& get_mouse_clicks() {
+    return mouseClickKeys;
+}
+
+const int& get_mouse_x(){
+  return mouseLocation.x;
+}
+
+const int& get_mouse_y(){
+  return mouseLocation.y;
 }
 
 const std::set<SDL_Keycode>& get_tapped_keys() {

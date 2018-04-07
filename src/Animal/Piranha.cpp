@@ -13,7 +13,7 @@ Piranha& Piranha::operator=(const Piranha& p){
 Coin Piranha::generateCoin(){
   Coin coin;
   if (eatAtLevel != -999){
-    coin.setValue(PRC_FISH * (eatAtLevel + 1)); //MARK -> nilaikoin = harga ikan * (tahap dimakan + 1)
+    coin.setValue(PRC_FISH * (eatAtLevel + 1));
     coin.setX(getX());
     coin.setY(getY());
     eatAtLevel = -999;

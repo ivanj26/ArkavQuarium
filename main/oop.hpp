@@ -23,7 +23,7 @@ int generateRandom(int lower, int upper);
 
 
 // Nama font yang digunakan untuk menggambar tulisan.
-const char* const FONT_NAME = "OpenSans-Regular.ttf";
+const char* const FONT_NAME = "../fonts/Ubuntu-L.ttf";
 
 // ---------------------------------- SETUP ----------------------------------
 

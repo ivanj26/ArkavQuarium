@@ -4,7 +4,7 @@
 #define SPEED_COIN_FOOD     1
 #define SPEED_FISH_NORMAL   2
 #define PRC_FISH 150
-
+#define INIT_MONEY 500
 
 // Pengaturan ukuran layar yang dihasilkan.
 const int SCREEN_WIDTH = 640;

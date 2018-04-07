@@ -10,6 +10,7 @@
 // Pengaturan ukuran layar yang dihasilkan.
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+const std::string DIR_ICONS = "../assets/";
 struct MouseLocation{
     int x;
     int y;
@@ -58,10 +59,6 @@ bool quit_pressed();
 
 // Untuk dua fungsi berikut, nama konstan kode yang tepat dapat dilihat di
 // https://wiki.libsdl.org/SDL_Keycode pada kolom "SDL_Keycode Value".
-
-// Mengembalikan himpunan kode tombol yang sedang ditekan pada saat
-// handle_input() terakhir dipanggil.
-const std::set<SDL_Keycode>& get_pressed_keys();
 
 // Mengembalikan himpunan kode tombol yang baru mulai ditekan pada saat
 // handle_input() terakhir dipanggil.

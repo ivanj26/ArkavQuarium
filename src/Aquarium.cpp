@@ -1,6 +1,5 @@
 #include "../include/Aquarium.hpp"
 #include "../main/oop.hpp"
-#include <iostream>
 
 Aquarium::Aquarium(){
 	this->max_X= SCREEN_WIDTH;
@@ -31,5 +30,5 @@ LinkedList<Fish> Aquarium::getFoods(){
 }
 
 void Aquarium::showAquarium(){
-	
+
 }

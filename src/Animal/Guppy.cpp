@@ -16,8 +16,8 @@ Guppy& Guppy::operator=(const Guppy& g){
     return *this;
 }
 
-void Guppy::printFish(string[] guppyNormal, string[] guppyHungry){
-    if (isFull)
+void Guppy::printFish(string guppyNormal[], string guppyHungry[]){
+    if (getIsFull())
       draw_image(guppyNormal[getStateGambar() + ((growLevel - 1) * 9)], getX(), getY());
     else
       draw_image(guppyHungry[getStateGambar() + ((growLevel - 1) * 9)], getX(), getY());
@@ -87,7 +87,7 @@ void Guppy::setGrowLevel(int growLevel){
 
 
 /* Asumsi : Kondisi sedang lapar*/
-void Guppy::findNearestFoodOrFish(LinkedList<Food>& foods){
+void Guppy::findNearestFoodOrFish(LinkedList<Food>& foods, double deltaTime){
   /*Jarak euclidean          = sqrt((x2-x1)^2 + (y2-y1)^2)*/
   /*Bergerak ke arah makanan = arctan(delta y / delta x)*/
   Node<Food> *node = foods.getHead();
@@ -114,6 +114,6 @@ void Guppy::findNearestFoodOrFish(LinkedList<Food>& foods){
       int deltaY = getY() - minNode->getValue().getY();
       int deltaX = getX() - minNode->getValue().getX();
 
-      Move(atan(deltaY / deltaX) * (180 / M_PI));
+      Move(atan(deltaY / deltaX) * (180 / M_PI), deltaTime);
    }
 }

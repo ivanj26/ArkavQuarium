@@ -44,7 +44,7 @@ class Fish{
 
         int getDirectionTo();
 
-        virtual void printFish() = 0; //Print si ikan, ngadepnya ngikutin variable string directionTo
+        virtual void printFish(string[], string[]) = 0; //Print si ikan, ngadepnya ngikutin variable string directionTo
         void findNearestFoodOrFish(); //(MARK) Buat nyari makan, overloading
 };
 

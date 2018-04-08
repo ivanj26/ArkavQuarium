@@ -24,8 +24,16 @@ Coin Piranha::generateCoin(){
   return coin;
 }
 
-void Piranha::printFish(){
-  //belum didefinisikan soalnya belum ada gambarnya
+void Piranha::printFish(string[] piranhaNormal, string[] piranhaHungry[]){
+  if (isFull)
+    draw_image(piranhaNormal[getStateGambar()], getX(), getY());
+  else
+    draw_image(piranhaHungry[getStateGambar()], getX(), getY());
+
+  if (getStateGambar() != 9)
+    setStateGambar(getStateGambar() + 1);
+  else
+    setStateGambar(0);
 }
 
 void Piranha::Eat(Guppy g){

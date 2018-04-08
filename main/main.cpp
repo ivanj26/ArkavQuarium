@@ -38,7 +38,7 @@ void updateAll(double now, int deltatime, bool (&unlockFish)[7], int (&x) [7], i
         case 2:
           break;
         case 3:
-          draw_image(DIR_ICONS + "piranha.png", x[i], 25);
+          draw_image(piranha_normal_gifs[j], x[i], 25);
           draw_text("$" + to_string(PRC_PIRANHA), 12, x[i] - 17, 45, 80, 255, 35);
           break;
         case 4:
@@ -166,7 +166,7 @@ int main( int argc, char* args[] )
         //         break;
         //     }
         // }
-        SDL_Delay(15);
+        SDL_Delay(20);
         updateAll(now, deltatime, unlockFish, x, i);
     }
 

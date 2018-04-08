@@ -16,6 +16,10 @@ Guppy& Guppy::operator=(const Guppy& g){
     return *this;
 }
 
+bool Guppy::operator!=(const Guppy& g){
+  return g.getX() == getX() && g.getY() == getY() && growLevel == g.growLevel && g.coinTime == coinTime && g.nbFood == nbFood;
+}
+
 void Guppy::printFish(string guppyNormal[], string guppyHungry[]){
     if (getIsFull())
       draw_image(guppyNormal[getStateGambar() + ((growLevel - 1) * 9)], getX(), getY());

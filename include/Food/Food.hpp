@@ -10,6 +10,7 @@ class Food{
     public:
         Food();
         Food(int, int);
+        bool operator!=(const Food&);
         Food& operator=(const Food&); //4 sekawan, utk operator assignment
         void Move(); //Move selalu ke bawah, SPEED_FOOD < SPEED_FISH_NORMAL
 

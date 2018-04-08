@@ -1,11 +1,12 @@
 #include "oop.hpp"
 #include <math.h>
-#include "../src/LinkedList/LinkedList.cpp"
-#include "../src/LinkedList/Node.cpp"
+#include "../include/LinkedList/LinkedList.hpp"
+#include "../include/LinkedList/Node.hpp"
 #include "../include/Global.hpp"
 #include "../src/Player.cpp"
 #include <string.h>
 #include <dirent.h>
+#include <iostream>
 using namespace std;
 
 const double speed = 50; // pixels per second

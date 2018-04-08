@@ -1,28 +1,36 @@
 #include "../../include/Animal/Guppy.hpp"
-#include "../LinkedList/Node.cpp"
-#include "../LinkedList/LinkedList.cpp"
+#include "../../include/LinkedList/Node.hpp"
+#include "../../include/LinkedList/LinkedList.hpp"
 #include <iostream>
 
 using namespace std;
 
 int main(){
-  LinkedList<Fish*> fishes;
-  Fish *fish = new Guppy();
-  fish->setX(90);
-  fish->setY(100);
+  LinkedList<Guppy*> linkedList;
+  Guppy *guppy = new Guppy();
+  guppy->setX(9);
+  guppy->setY(10);
 
-  fishes.add(fish);
+  linkedList.add(guppy);
+  guppy = nullptr;
+  delete guppy;
 
-  cout << "test" << endl;
+  guppy = new Guppy();
+  guppy->setX(89);
+  guppy->setY(100);
 
-  int x = fishes.find(fish);
-  cout << x << endl;
+  linkedList.add(guppy);
+  delete guppy;
+
+  for (int i = 0; i < linkedList.getCurrentSize(); i++){
+    Guppy u = *(linkedList.getIndex(i));
+    cout << u.getX() << " " << u.getY() << endl;
+  }
   // Guppy guppy;
   //
   // guppy.setX(25);
   // guppy.setY(70);
   //
   // fishes.add(guppy);
-  delete fish;
   return 0;
 }

@@ -11,6 +11,11 @@ Food::Food(int nx, int ny){
 	this->location.y = ny;
 	this->isReachBottom = false;
 }
+
+bool Food::operator!=(const Food& f){
+	return location.x == f.location.x && location.y == f.location.y && isReachBottom == f.isReachBottom;
+}
+
 Food& Food::operator=(const Food& f){
 	this->location.x = f.location.x;
 	this->location.y = f.location.y;

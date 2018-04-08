@@ -1,22 +1,18 @@
 #include "../../include/Aquarium.hpp"
-#include "../../main/oop.hpp"
-#include "../../include/LinkedList/Node.hpp"
-#include "../../include/Animal/Fish.hpp"
-#include "../../include/Animal/Snail.hpp"
-#include "../../include/Animal/Guppy.hpp"
 #include <iostream>
 using namespace std;
 
-Aquarium::Aquarium():snail(){
+Aquarium::Aquarium(){
 	Fishes = new LinkedList<Fish>();
 	Coins = new LinkedList<Coin>();
 	Foods = new LinkedList<Food>();
-}
-
-Aquarium::Aquarium(int x , int y):snail(){
-	Fishes = new LinkedList<Fish>();
-	Coins = new LinkedList<Coin>();
-	Foods = new LinkedList<Food>();
+	Guppy guppy();
+	guppy.setX(generateRandom(40,SCREEN_WIDTH-40));
+	guppy.setY(generateRandom(115,SCREEN_HEIGHT-40))
+	guppy.setGrowLevel(1);
+	guppy.setCoinTime(0);
+	guppy.setNbFood(0);
+	Fishes.add(guppy);
 }
 
 Snail Aquarium::getSnail(){

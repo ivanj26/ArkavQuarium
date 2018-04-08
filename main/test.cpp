@@ -11,7 +11,7 @@ public:
 class Derived: public Base
 {
 public:
-    virtual void show() { cout<<"In Derived \n"; }
+   void show() { cout<<"In Derived \n"; }
     using Base::find;
     virtual void find(int a) {cout <<"find \n";}
 };
@@ -28,12 +28,11 @@ int A::a = 0;
 
 int main(void)
 {
-  cout << A::a << endl;
-    // Base *bp = new Derived;
-    // bp->show();
+    Base *bp = new Derived;
+    bp->find(1);
     //
     // Derived* boy = dynamic_cast<Derived*>(bp);
-    // boy->find(1);
+    // boy->find();
 
     return 0;
 }

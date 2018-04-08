@@ -1,44 +1,49 @@
-#include "..\..\include\Food"
+#include "../../include/Food/Food.hpp"
+
+Food::Food(){
+	this->location.x = 40;
+	this->location.y = 115;
+	this->isReachBottom = false;
+}
 
 Food::Food(int nx, int ny){
-	this.location.x = nx;
-	this.location.y = ny;
-	this.isReachBottom = false;
+	this->location.x = nx;
+	this->location.y = ny;
+	this->isReachBottom = false;
 }
-Food::Food(location nl){
-	this.location.x = nl.x;
-	this.location.y = nl.y;
-	this.isReachBottom = false;
+Food& Food::operator=(const Food& f){
+	this->location.x = f.location.x;
+	this->location.y = f.location.y;
+	this->isReachBottom = f.isReachBottom;
+
+	return *this;
 }
-Food& operator=(const Food& f){
-	this.location.x = f.location.x;
-	this.location.y = f.location.y;
-	this.isReachBottom = f.isReachBottom;
-}
-void Move(){
-	setY(getY()++);
+void Food::Move(){
+	if (location.x < SCREEN_HEIGHT - 40){
+		setY(getY() + 1);
+	}
 }
 
-int getX(){
-	return this.location.x;
+int Food::getX(){
+	return this->location.x;
 }
 
-int getY(){
-	return this.location.y;
+int Food::getY(){
+	return this->location.y;
 }
 
-void setX(int nx){
-	this.location.x = nx;
+void Food::setX(int nx){
+	this->location.x = nx;
 }
 
-void setY(int) {
-	this.location.y = ny;
+void Food::setY(int ny) {
+	this->location.y = ny;
 }
 
-void setIsReachBottom(bool irb){
-	this.isReachBottom = irb;
+void Food::setIsReachBottom(bool irb){
+	this->isReachBottom = irb;
 }
 
-bool getIsReachBottom()const{
-	return this.isReachBottom;
+bool Food::getIsReachBottom()const{
+	return isReachBottom;
 }

@@ -39,7 +39,6 @@ void close();
 // titik (x, y).
 // Perubahan di layar baru muncul ketika update_screen() dipanggil.
 void draw_image(std::string filename, int x, int y);
-
 // Menuliskan teks berukuran font_size berwarna (r, g, b) ke layar sehingga
 // kiri atas teks berada di titik (x, y).
 // Perubahan di layar baru muncul ketika update_screen() dipanggil.

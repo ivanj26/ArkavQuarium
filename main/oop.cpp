@@ -105,6 +105,77 @@ void draw_image(std::string filename, int x, int y) {
     SDL_BlitSurface(s, NULL, gScreenSurface, &dest);
 }
 
+// SDL_Texture *LoadTexture(std::string filePath, SDL_Renderer *renderTarget)
+// {
+// 	SDL_Texture *texture = nullptr;
+// 	SDL_Surface *surface = IMG_Load(filePath.c_str());
+// 	if(surface == NULL)
+// 		std::cout << "Error" << std::endl;
+// 	else
+// 	{
+// 		//SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 0, 0));
+//     Uint32 colorkey = SDL_MapRGB(surface->format, 0, 0, 0);
+//     SDL_SetColorKey(surface, SDL_TRUE, colorkey);
+//     texture = SDL_CreateTextureFromSurface(renderTarget, surface);
+// 		if(texture == NULL)
+// 			std::cout << "Error" << std::endl;
+// 	}
+//
+// 	SDL_FreeSurface(surface);
+//
+// 	return texture;
+// }
+
+// void draw_gif(std::string filename, int x, int y){
+//     int frameWidth, frameHeight;
+//     int textureWidth, textureHeight;
+//
+//     SDL_Rect fishRect;
+//     SDL_Rect position;
+//     SDL_Texture *currentImage = nullptr;
+//     SDL_Renderer *renderTarget = nullptr;
+//     position.x = position.y = 150;
+//     position.w = position.h = 40;
+//
+//     renderTarget = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+//     currentImage = LoadTexture(filename, renderTarget);
+//
+//     SDL_QueryTexture(currentImage, NULL, NULL, &textureWidth, &textureHeight);
+//     frameWidth = textureWidth / 10;
+//     frameHeight = textureHeight / 5;
+//
+//     fishRect.x = fishRect.y = 0;
+//     fishRect.w = frameWidth;
+//     fishRect.h = frameHeight;
+//
+//     int frameTime = 0;
+//     bool isRunning = true;
+//     int cycle = 0;
+//     while (isRunning && cycle < 3){
+//       SDL_SetRenderDrawBlendMode(renderTarget, SDL_BLENDMODE_BLEND);
+//       SDL_SetRenderDrawColor(renderTarget, 0,0,0,0);
+//       frameTime++;
+//       if (60 / frameTime == 4){
+//         frameTime = 0;
+//         fishRect.x += frameWidth;
+//         if (fishRect.x >= textureWidth){
+//           fishRect.x = 0;
+//         }
+//         cycle++;
+//       }
+//
+//       SDL_RenderClear(renderTarget);
+//       SDL_RenderCopy(renderTarget, currentImage, &fishRect, &position);
+//       SDL_RenderPresent(renderTarget);
+//     }
+//
+//     SDL_DestroyTexture(currentImage);
+//     SDL_DestroyRenderer(renderTarget);
+//
+//     currentImage = nullptr;
+//     renderTarget = nullptr;
+// }
+
 void draw_text(std::string text, int font_size, int x, int y, unsigned char r, unsigned char g, unsigned char b) {
     if (loadedFontSizes.count(font_size) < 1) {
         loadedFontSizes[font_size] = TTF_OpenFont(FONT_NAME, font_size);

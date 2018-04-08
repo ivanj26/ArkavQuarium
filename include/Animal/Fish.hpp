@@ -1,4 +1,5 @@
 #include "../Coin/Coin.hpp"
+#include "../../main/oop.hpp"
 
 #include <string>
 
@@ -12,7 +13,7 @@ using namespace std;
 
 class Fish{
     private:
-        string directionTo;     // Lagi ngadep kemana
+        int directionTo;     // Lagi ngadep kemana
         Location location;
         bool isFull;            // Lagi kenyang(?)
         long hungerTime;
@@ -22,7 +23,7 @@ class Fish{
         Fish();
         virtual Coin generateCoin() = 0; //Method Override, didefinisikan di class turunannya
         void Eat();             // Method Overloading, dia makannya makan apa(?) definisiin saat di class turunannya
-        void Move(double);         // MARK perubahan tipe parameter
+        void Move(double,double);         // MARK perubahan tipe parameter
 
         /*Get & Set Location*/
         int getX()const;
@@ -38,7 +39,7 @@ class Fish{
         void setHungerTime(long);
         long getHungerTime();
 
-        string getDirectionTo();
+        int getDirectionTo();
 
         virtual void printFish() = 0; //Print si ikan, ngadepnya ngikutin variable string directionTo
         void findNearestFoodOrFish(); //(MARK) Buat nyari makan, overloading

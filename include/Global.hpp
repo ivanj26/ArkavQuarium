@@ -3,7 +3,8 @@
 
 #define SPEED_COIN_FOOD     1
 #define SPEED_FISH_NORMAL   2
-#define PRC_FISH 150
+#define PRC_GUPPY 20
+#define PRC_PIRANHA 50
 #define INIT_MONEY 500
 
 // Pengaturan ukuran layar yang dihasilkan.

@@ -8,16 +8,24 @@ Fish::Fish():intervalToDie(INTERVAL_TO_DIE), intervalFull(INTERVAL_FULL){
   // location.y = random
 }
 void Fish::Eat(){}
-void Fish::Move(double degree){
+void Fish::Move(double degree, double deltatime){
     //Belum dikali waktu
-	  //MARK -> ukuran guppy (pjg dan lebar) belum tau, harus ada koreksi nilai lagi
-    if ((location.x += (SPEED_FISH_NORMAL *  ((int)cos(degree * (M_PI / 180))))) > SCREEN_WIDTH){
-      location.x = SCREEN_WIDTH;
+	  /*Spek gambar :
+     * Ada menu bar yang tingginya 75px, maka batas bawah height jadi 75+40 = 115 (40 nilai tengah tinggi guppy), batas atas : SCREEN_HEIGHT- 40
+     * sedangkan batas bawah lebar hanya nilai tengah guppy jadinya 40px, batas atas sama nilainya seperti batas atas tinggi*/
+
+    bool isInsideX = ((location.x + int(SPEED_FISH_NORMAL * deltatime * cos(degree * (M_PI / 180)))) <= SCREEN_WIDTH - 40) && ((location.x + int(SPEED_FISH_NORMAL * deltatime * cos(degree * (M_PI / 180)))) >= 40);
+    bool isInsideY = ((location.y + int(SPEED_FISH_NORMAL * deltatime * sin(degree * (M_PI / 180)))) <= SCREEN_HEIGHT - 40) && ((location.y + int(SPEED_FISH_NORMAL * deltatime * sin(degree * (M_PI / 180)))) >= 115);
+
+    while (!(isInsideX && isInsideY)){
+      //Cari arah baru kalau lewatin batas bawah atau atasnya
+      degree = generateRandom(0,360);
+      isInsideX = ((location.x + int(SPEED_FISH_NORMAL * deltatime * cos(degree * (M_PI / 180)))) <= SCREEN_WIDTH - 40) && ((location.x + int(SPEED_FISH_NORMAL * deltatime * cos(degree * (M_PI / 180)))) >= 40);
+      isInsideY = ((location.y + int(SPEED_FISH_NORMAL * deltatime * sin(degree * (M_PI / 180)))) <= SCREEN_HEIGHT - 40) && ((location.y + int(SPEED_FISH_NORMAL * deltatime * sin(degree * (M_PI / 180)))) >= 115);
     }
 
-    if ((location.y += (SPEED_FISH_NORMAL *  ((int)sin(degree * (M_PI / 180))))) > SCREEN_HEIGHT){
-      location.y = SCREEN_HEIGHT;
-    }
+    location.x += int(SPEED_FISH_NORMAL * deltatime * cos(degree * (M_PI / 180)));
+    location.y += int(SPEED_FISH_NORMAL * deltatime * sin(degree * (M_PI / 180)));
 }
 
 int Fish::getX() const{
@@ -52,7 +60,7 @@ long Fish::getHungerTime(){
     return hungerTime;
 }
 
-string Fish::getDirectionTo(){
+int Fish::getDirectionTo(){
   return directionTo;
 }
 

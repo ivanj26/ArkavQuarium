@@ -3,13 +3,22 @@
 
 Fish::Fish():intervalToDie(INTERVAL_TO_DIE), intervalFull(INTERVAL_FULL){
   isFull = true;
+  stateGambar = 0;
   hungerTime = INTERVAL_FULL;
   // location.x = random
   // location.y = random
 }
+
+void Fish::setStateGambar(int x){
+  stateGambar = x;
+}
+
+int Fish::getStateGambar(){
+  return stateGambar;
+}
+
 void Fish::Eat(){}
 void Fish::Move(double degree, double deltatime){
-    //Belum dikali waktu
 	  /*Spek gambar :
      * Ada menu bar yang tingginya 75px, maka batas bawah height jadi 75+40 = 115 (40 nilai tengah tinggi guppy), batas atas : SCREEN_HEIGHT- 40
      * sedangkan batas bawah lebar hanya nilai tengah guppy jadinya 40px, batas atas sama nilainya seperti batas atas tinggi*/

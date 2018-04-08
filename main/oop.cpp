@@ -105,6 +105,8 @@ void draw_image(std::string filename, int x, int y) {
     SDL_BlitSurface(s, NULL, gScreenSurface, &dest);
 }
 
+
+
 // SDL_Texture *LoadTexture(std::string filePath, SDL_Renderer *renderTarget)
 // {
 // 	SDL_Texture *texture = nullptr;
@@ -114,8 +116,9 @@ void draw_image(std::string filename, int x, int y) {
 // 	else
 // 	{
 // 		//SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 0, 0));
-//     Uint32 colorkey = SDL_MapRGB(surface->format, 0, 0, 0);
-//     SDL_SetColorKey(surface, SDL_TRUE, colorkey);
+//     surface->format->Amask = 0xFF000000;
+//     surface->format->Ashift = 24;
+//     SDL_SetColorKey( surface , SDL_TRUE, SDL_MapRGB( surface->format, 0, 0, 0) );
 //     texture = SDL_CreateTextureFromSurface(renderTarget, surface);
 // 		if(texture == NULL)
 // 			std::cout << "Error" << std::endl;
@@ -125,7 +128,7 @@ void draw_image(std::string filename, int x, int y) {
 //
 // 	return texture;
 // }
-
+//
 // void draw_gif(std::string filename, int x, int y){
 //     int frameWidth, frameHeight;
 //     int textureWidth, textureHeight;
@@ -134,10 +137,12 @@ void draw_image(std::string filename, int x, int y) {
 //     SDL_Rect position;
 //     SDL_Texture *currentImage = nullptr;
 //     SDL_Renderer *renderTarget = nullptr;
+//
 //     position.x = position.y = 150;
 //     position.w = position.h = 40;
 //
 //     renderTarget = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+//     SDL_SetRenderDrawBlendMode(renderTarget, SDL_BLENDMODE_BLEND);
 //     currentImage = LoadTexture(filename, renderTarget);
 //
 //     SDL_QueryTexture(currentImage, NULL, NULL, &textureWidth, &textureHeight);
@@ -152,7 +157,6 @@ void draw_image(std::string filename, int x, int y) {
 //     bool isRunning = true;
 //     int cycle = 0;
 //     while (isRunning && cycle < 3){
-//       SDL_SetRenderDrawBlendMode(renderTarget, SDL_BLENDMODE_BLEND);
 //       SDL_SetRenderDrawColor(renderTarget, 0,0,0,0);
 //       frameTime++;
 //       if (60 / frameTime == 4){
@@ -163,10 +167,8 @@ void draw_image(std::string filename, int x, int y) {
 //         }
 //         cycle++;
 //       }
-//
-//       SDL_RenderClear(renderTarget);
-//       SDL_RenderCopy(renderTarget, currentImage, &fishRect, &position);
 //       SDL_RenderPresent(renderTarget);
+//       SDL_RenderCopy(renderTarget, currentImage, &fishRect, &position);
 //     }
 //
 //     SDL_DestroyTexture(currentImage);

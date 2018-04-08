@@ -19,7 +19,7 @@ class Guppy : public Fish{
         Guppy(); //default constructor untuk isi const growTo2 dan growTo3
         Guppy& operator=(const Guppy&);//4 sekawan, untuk operator assignment
         Coin generateCoin(); //override
-        void printFish();
+        void printFish(string[], string[]);
         void Eat(Food); //overloading
 
         /*Get & Set*/

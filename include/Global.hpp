@@ -3,9 +3,13 @@
 
 #define SPEED_COIN_FOOD     1
 #define SPEED_FISH_NORMAL   2
-#define PRC_GUPPY 20
-#define PRC_PIRANHA 50
-#define INIT_MONEY 500
+#define PRC_GUPPY 100
+#define PRC_EGG_1 3000
+#define PRC_EGG_2 4000
+#define PRC_EGG_3 5000
+#define PRC_FOOD 40
+#define PRC_PIRANHA 1000
+#define INIT_MONEY 200
 
 // Pengaturan ukuran layar yang dihasilkan.
 const int SCREEN_WIDTH = 640;

@@ -13,6 +13,7 @@ using namespace std;
 
 class Fish{
     private:
+        int stateGambar;
         int directionTo;     // Lagi ngadep kemana
         Location location;
         bool isFull;            // Lagi kenyang(?)
@@ -21,6 +22,8 @@ class Fish{
         const int intervalFull;       // Batas waktu dia kenyang berapa lama
     public:
         Fish();
+        int getStateGambar();
+        void setStateGambar(int);
         virtual Coin generateCoin() = 0; //Method Override, didefinisikan di class turunannya
         void Eat();             // Method Overloading, dia makannya makan apa(?) definisiin saat di class turunannya
         void Move(double,double);         // MARK perubahan tipe parameter

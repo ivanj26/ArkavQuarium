@@ -16,18 +16,16 @@ Guppy& Guppy::operator=(const Guppy& g){
     return *this;
 }
 
-void Guppy::printFish(){
-  switch (growLevel) {
-    case 1:
-      draw_image(DIR_ICONS + "guppy_normal_1.png", generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
-    break;
-    case 2:
-      draw_image(DIR_ICONS + "guppy_normal_2.png", generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
-    break;
-    case 3:
-      draw_image(DIR_ICONS + "guppy_normal_3.png",generateRandom(40, SCREEN_WIDTH - 40), generateRandom(75 + 40, SCREEN_HEIGHT - 40));
-    break;
-  }
+void Guppy::printFish(string[] guppyNormal, string[] guppyHungry){
+    if (isFull)
+      draw_image(guppyNormal[getStateGambar() + ((growLevel - 1) * 9)], getX(), getY());
+    else
+      draw_image(guppyHungry[getStateGambar() + ((growLevel - 1) * 9)], getX(), getY());
+
+    if (getStateGambar() != 9)
+      setStateGambar(getStateGambar() + 1);
+    else
+      setStateGambar(0);
 }
 
 Coin Guppy::generateCoin(){

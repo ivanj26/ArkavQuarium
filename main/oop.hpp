@@ -38,6 +38,8 @@ void close();
 // Menggambar suatu gambar png, jpg, bmp sehingga tengah gambar berada di
 // titik (x, y).
 // Perubahan di layar baru muncul ketika update_screen() dipanggil.
+// SDL_Texture *LoadTexture(std::string filePath, SDL_Renderer *renderTarget);
+// void draw_gif(std::string filename, int x, int y);
 void draw_image(std::string filename, int x, int y);
 // Menuliskan teks berukuran font_size berwarna (r, g, b) ke layar sehingga
 // kiri atas teks berada di titik (x, y).

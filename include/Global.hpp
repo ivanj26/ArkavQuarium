@@ -1,9 +1,9 @@
 #ifndef GLOBAL_HPP
 #define GLOBAL_HPP
 
-#define SPEED_COIN_FOOD     3
-#define SPEED_FISH_NORMAL   5
-#define SPEED_SNAIL         2
+#define SPEED_COIN_FOOD     80
+#define SPEED_FISH_NORMAL   87
+#define SPEED_SNAIL         60
 #define PRC_GUPPY 100
 #define PRC_EGG_1 3000
 #define PRC_EGG_2 4000

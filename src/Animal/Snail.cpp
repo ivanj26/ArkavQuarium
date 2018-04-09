@@ -32,7 +32,7 @@ void Snail::Move(double degree, double deltatime){
     isInsideX = ((location.x + int(SPEED_SNAIL * deltatime * cos(degree * (M_PI / 180)))) <= SCREEN_WIDTH - 40);
   }
 
-  location.x += int(SPEED_FISH_NORMAL * deltatime * cos(degree * (M_PI / 180)));
+  location.x += int(SPEED_SNAIL * deltatime * cos(degree * (M_PI / 180)));
 }
 
 /*Get & Set*/
@@ -78,4 +78,18 @@ void Snail::findNearestCoin(LinkedList<Coin> Coins, double deltatime){
       double degree = atan(deltaY / deltaX) * (180 / M_PI);
       Move(double(round(degree)) * 180, deltatime);
     }
+}
+
+int Snail::getStateGambar(){return stateGambar;}
+
+void Snail::setStateGambar(int i){
+  stateGambar = i;
+}
+
+void Snail::printSnail(string snail_move[]){
+  draw_image(snail_move[getStateGambar()], getX(), getY());
+  if (getStateGambar() != 9)
+    setStateGambar(getStateGambar() + 1);
+  else
+    setStateGambar(0);
 }

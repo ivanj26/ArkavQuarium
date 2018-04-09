@@ -9,10 +9,10 @@ using namespace std;
 
 const double speed = 50; // pixels per second
 
-
+string snail_move_gifs[10];
 string guppy_normal_gifs[30];
 string piranha_normal_gifs[10];
-void updateAll(double now, int deltatime, bool (&unlockFish)[7], int (&x) [7], int &j, Aquarium& aquarium){
+void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7], int &j, Aquarium& aquarium){
   clear_screen();
   /* Draw aquarium & menu_bar to screen*/
   draw_image(DIR_ICONS + "aquarium2.jpg", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
@@ -68,13 +68,21 @@ void updateAll(double now, int deltatime, bool (&unlockFish)[7], int (&x) [7], i
   Player::setMoney(Player::getMoney() + aquarium.getSnail().getAmountCoin());
   aquarium.getSnail().setAmountCoin(0);
   Player::printMoney();
+
+  /* Update semua fish, food, dan coin*/
+  aquarium.getSnail().printSnail(snail_move_gifs);
+  aquarium.getSnail().Move(double(round(generateRandom(0,180))), deltatime);
   for (int i = 0; i < aquarium.getFishes().getCurrentSize(); i++){
     if (aquarium.getFishes().getHead()->getValue()->getID() == 0){
-      cout << "This is guppy!" << endl;
-      Guppy *guppy = dynamic_cast<Guppy*> (aquarium.getFishes().getHead()->getValue());
+      Guppy *guppy = dynamic_cast<Guppy*> (aquarium.getFishes().getIndex(i));
       guppy->printFish(guppy_normal_gifs, guppy_normal_gifs);
+      guppy = nullptr;
+      delete guppy;
+    } else {
+
     }
   }
+
   update_screen();
 }
 
@@ -90,6 +98,7 @@ int main( int argc, char* args[] )
     //Catet nama file guppy gif, piranha gif, dan gif lain
     string DIR_GUPPY_NORMAL = DIR_ICONS + "Animal/GuppyNormal/";
     string DIR_GUPPY_HUNGRY = DIR_ICONS + "Animal/GuppyHungry/";
+    string DIR_SNAIL_MOVE = DIR_ICONS + "Animal/SnailMove/";
     string DIR_PIRANHA_NORMAL = DIR_ICONS + "Animal/PiranhaNormal/";
     string DIR_PIRANHA_HUNGRY = DIR_ICONS + "Animal/PiranhaHungry/";
 
@@ -120,6 +129,17 @@ int main( int argc, char* args[] )
       if (contains){
         int idx = int(pdir->d_name[11]) - 48;
     		piranha_normal_gifs[idx] = DIR_PIRANHA_NORMAL + pdir->d_name;
+      }
+  	}
+
+    dir = opendir(DIR_SNAIL_MOVE.c_str());
+    contains = NULL;
+  	while(pdir=readdir(dir))
+  	{
+      contains = strstr (pdir->d_name, gif);
+      if (contains){
+        int idx = int(pdir->d_name[9]) - 48;
+    	  snail_move_gifs[idx] = DIR_SNAIL_MOVE + pdir->d_name;
       }
   	}
 
@@ -176,7 +196,7 @@ int main( int argc, char* args[] )
         //         break;
         //     }
         // }
-        SDL_Delay(20);
+        SDL_Delay(40);
         updateAll(now, deltatime, unlockFish, x, i, aquarium);
     }
 

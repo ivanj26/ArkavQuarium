@@ -3,6 +3,7 @@
 #include "oop.hpp"
 
 #include <map>
+#include <time.h>
 #include <iostream>
 #include <chrono>
 
@@ -87,6 +88,7 @@ SDL_Surface* loadSurface( std::string path )
 
 int generateRandom(int lower, int upper)
   {
+    srand(time(NULL));
     return lower + (rand() % (upper - lower + 1));
   }
 

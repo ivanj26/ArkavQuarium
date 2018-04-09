@@ -4,12 +4,21 @@
 #include "../../include/Animal/Snail.hpp"
 #include "../../include/LinkedList/Node.hpp"
 #include "../../include/LinkedList/LinkedList.hpp"
+#include "../../include/Aquarium.hpp"
 #include <iostream>
 using namespace std;
 
 Aquarium::Aquarium():snail(){
 	//Menginisiasi Guppy dan insert ke LinkedList of Guppy
 	Guppy *guppy= new Guppy();
+	guppy->setX(generateRandom(40,SCREEN_WIDTH-40));
+	guppy->setY(generateRandom(115,SCREEN_HEIGHT-40));
+	Fishes.add(guppy);
+	guppy = nullptr;
+	delete guppy;
+
+	SDL_Delay(1000);
+	guppy = new Guppy();
 	guppy->setX(generateRandom(40,SCREEN_WIDTH-40));
 	guppy->setY(generateRandom(115,SCREEN_HEIGHT-40));
 	Fishes.add(guppy);

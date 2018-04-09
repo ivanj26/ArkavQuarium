@@ -2,13 +2,17 @@
 #include "../../main/oop.hpp"
 #include "../LinkedList/Node.hpp"
 #include "../LinkedList/LinkedList.hpp"
+#include <string>
 
 #ifndef SNAIL_HPP
 #define SNAIL_HPP
 
+using namespace std;
+
 class Snail {
     private:
         Location location;
+        int stateGambar;
         int amountCoin; //Banyaknya koin sekarang yang ditampung Snail
     public:
         Snail();
@@ -17,13 +21,17 @@ class Snail {
         /* KASUS I  = Kalau ada koin dia didekatnya, dia gerak ke lokasi koin
          * KASUS II = Kalau ga ada koin, dia diem
         */
-        void Move(double,double); 
-
+        void Move(double,double);
+        void printSnail(string[]);
         /*Get & Set*/
         void setX(int);
         int getX()const;
         void setY(int);
         int getY()const;
+
+        /*get & set */
+        int getStateGambar();
+        void setStateGambar(int);
 
         /*Get & Set amountCoin*/
         void setAmountCoin(int);

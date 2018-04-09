@@ -50,20 +50,25 @@ void Piranha::setEatAtLevel(int eatAtLevel){
   this->eatAtLevel = eatAtLevel;
 }
 
-void Piranha::findNearestFoodOrFish(LinkedList<Guppy>& guppies, double deltatime){
-  Node<Guppy>* node = guppies.getHead();
-  double tempMin = sqrt(pow(getX() - node->getValue().getX(),2) + pow(getY() - node->getValue().getY(),2));
+void Piranha::findNearestFoodOrFish(LinkedList<Fish*>& fishes, double deltatime){
+  Node<Fish*>* node = fishes.getHead();
+
+  while (node->getValue()->getID() != 0){
+    node = node->getNext();
+  }
+
+  double tempMin = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
+  Node<Fish*> *minNode = node;
 
   if (tempMin == 0){ //Makanan tepat di posisi piranha
-    Eat(node->getValue());
-    guppies.remove(node->getValue());
+    Guppy *guppy = dynamic_cast<Guppy*>(minNode->getValue());
+    Eat(*guppy);
+    fishes.remove(minNode->getValue());
   } else {
     int i = 1;
-    Node<Guppy> *minNode = guppies.getHead();
-
-    while (tempMin != 0 && i < guppies.getCurrentSize()){
+    while (tempMin != 0 && i < fishes.getCurrentSize() && node->getValue()->getID() != 0){
       node = node->getNext();
-      double temp = sqrt(pow(getX() - node->getValue().getX(),2) + pow(getY() - node->getValue().getY(),2));
+      double temp = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
       if (tempMin >  temp){
         tempMin = temp;
         minNode = node;
@@ -72,8 +77,8 @@ void Piranha::findNearestFoodOrFish(LinkedList<Guppy>& guppies, double deltatime
     }
 
     //Bergerak ke arah makanan terdekat
-    int deltaY = getY() - minNode->getValue().getY();
-    int deltaX = getX() - minNode->getValue().getX();
+    int deltaY = getY() - minNode->getValue()->getY();
+    int deltaX = getX() - minNode->getValue()->getX();
 
     Move(atan(deltaY / deltaX) * (180 / M_PI), deltatime);
   }

@@ -6,6 +6,7 @@
 #ifndef FISH_HPP
 #define FISH_HPP
 
+#define INTERVAL_TIME_DIRECTION 2000
 #define INTERVAL_TO_DIE 8000 //8000 ms
 #define INTERVAL_FULL 10000 //10000 ms
 
@@ -13,9 +14,10 @@ using namespace std;
 
 class Fish{
     private:
+        double timeDirection;
         int ID;
         int stateGambar;
-        int directionTo;     // Lagi ngadep kemana
+        double directionTo;     // Lagi ngadep kemana
         Location location;
         bool isFull;            // Lagi kenyang(?)
         long hungerTime;
@@ -23,6 +25,8 @@ class Fish{
         const int intervalFull;       // Batas waktu dia kenyang berapa lama
     public:
         Fish();
+        double getTimeDirection();
+        void setTimeDirection(double);
         int getStateGambar();
         void setStateGambar(int);
         virtual Coin generateCoin() = 0; //Method Override, didefinisikan di class turunannya
@@ -48,8 +52,8 @@ class Fish{
         int getID();
 
         /*get and set*/
-        void setDirectionTo(int);
-        int getDirectionTo();
+        void setDirectionTo(double);
+        double getDirectionTo();
 
         virtual void printFish(string[], string[]) = 0; //Print si ikan, ngadepnya ngikutin variable string directionTo
         void findNearestFoodOrFish(); //(MARK) Buat nyari makan, overloading

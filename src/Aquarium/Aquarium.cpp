@@ -17,7 +17,6 @@ Aquarium::Aquarium():snail(){
 	guppy = nullptr;
 	delete guppy;
 
-	SDL_Delay(1000);
 	guppy = new Guppy();
 	guppy->setX(generateRandom(40,SCREEN_WIDTH-40));
 	guppy->setY(generateRandom(115,SCREEN_HEIGHT-40));

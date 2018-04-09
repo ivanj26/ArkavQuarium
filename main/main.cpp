@@ -5,6 +5,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <iostream>
+#include <pthread.h>
 using namespace std;
 
 const double speed = 50; // pixels per second
@@ -70,16 +71,33 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
 
   /* Update semua fish, food, dan coin*/
   aquarium.getSnail().printSnail(snail_move_gifs);
-  aquarium.getSnail().Move(double(round(generateRandom(0,180))), deltatime);
   for (int i = 0; i < aquarium.getFishes().getCurrentSize(); i++){
     if (aquarium.getFishes().getHead()->getValue()->getID() == 0){
       Guppy *guppy = dynamic_cast<Guppy*> (aquarium.getFishes().getIndex(i));
       guppy->printFish(guppy_normal_gifs, guppy_normal_gifs);
+
+      if (aquarium.getFoods().getCurrentSize() == 0){
+        if (guppy->getTimeDirection() <= 0){
+          guppy->setTimeDirection(-1);
+        } else {
+          guppy->setTimeDirection(guppy->getTimeDirection() - 1000);
+        }
+        guppy->Move(generateRandom(0,360), deltatime);
+      } else if (aquarium.getFoods().getCurrentSize() > 0 && !guppy->getIsFull()){
+        guppy->findNearestFoodOrFish(aquarium.getFoods(), deltatime);
+      }
       guppy = nullptr;
       delete guppy;
     } else {
       Piranha *piranha = dynamic_cast<Piranha*> (aquarium.getFishes().getIndex(i));
       piranha->printFish(piranha_normal_gifs, piranha_normal_gifs);
+
+      if (aquarium.getFoods().getCurrentSize() == 0){
+        piranha->Move(generateRandom(0,360), deltatime);
+      } else if (aquarium.getFoods().getCurrentSize() > 0 && !piranha->getIsFull()){
+        piranha->findNearestFoodOrFish(aquarium.getFishes(), deltatime);
+      }
+
       piranha = nullptr;
       delete piranha;
     }
@@ -88,6 +106,13 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
   for (int i = 0; i < aquarium.getFoods().getCurrentSize(); i++){
       Food food = (aquarium.getFoods().getIndex(i));
       food.printFood(foods_move_gifs);
+  }
+
+  /*Move Snail, etc*/
+  if (aquarium.getCoins().getCurrentSize() == 0){
+    aquarium.getSnail().Move(double(round(generateRandom(0,180))), deltatime);
+  } else {
+    aquarium.getSnail().findNearestCoin(aquarium.getCoins(), deltatime);
   }
 
   update_screen();
@@ -234,10 +259,9 @@ int main( int argc, char* args[] )
         //         break;
         //     }
         // }
-        SDL_Delay(50);
+        SDL_Delay(120);
         updateAll(now, deltatime, unlockFish, x, i, aquarium);
     }
-
     close();
 
     return 0;

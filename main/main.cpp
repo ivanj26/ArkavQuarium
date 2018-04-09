@@ -68,6 +68,13 @@ void updateAll(double now, int deltatime, bool (&unlockFish)[7], int (&x) [7], i
   Player::setMoney(Player::getMoney() + aquarium.getSnail().getAmountCoin());
   aquarium.getSnail().setAmountCoin(0);
   Player::printMoney();
+  for (int i = 0; i < aquarium.getFishes().getCurrentSize(); i++){
+    if (aquarium.getFishes().getHead()->getValue()->getID() == 0){
+      cout << "This is guppy!" << endl;
+      Guppy *guppy = dynamic_cast<Guppy*> (aquarium.getFishes().getHead()->getValue());
+      guppy->printFish(guppy_normal_gifs, guppy_normal_gifs);
+    }
+  }
   update_screen();
 }
 

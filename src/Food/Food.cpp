@@ -1,6 +1,7 @@
 #include "../../include/Food/Food.hpp"
 
 Food::Food(){
+	stateGambar = 0;
 	this->location.x = 40;
 	this->location.y = 115;
 	this->isReachBottom = false;
@@ -51,4 +52,18 @@ void Food::setIsReachBottom(bool irb){
 
 bool Food::getIsReachBottom()const{
 	return isReachBottom;
+}
+
+int Food::getStateGambar(){return stateGambar;}
+
+void Food::setStateGambar(int i){
+  stateGambar = i;
+}
+
+void Food::printFood(string foods[]){
+	draw_image(foods[getStateGambar()], getX(), getY());
+  if (getStateGambar() != 9)
+    setStateGambar(getStateGambar() + 1);
+  else
+    setStateGambar(0);
 }

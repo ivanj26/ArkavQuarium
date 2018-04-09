@@ -8,7 +8,7 @@
 #define PRC_EGG_1 3000
 #define PRC_EGG_2 4000
 #define PRC_EGG_3 5000
-#define PRC_FOOD 40
+#define PRC_FOOD 5
 #define PRC_PIRANHA 1000
 #define INIT_MONEY 200
 

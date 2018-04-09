@@ -154,7 +154,8 @@ void LinkedList<T>::remove(T value){
 template <class T>
 T LinkedList<T>::getIndex(int n){
   if (n >= currentSize){
-    return NULL;
+    T *t = nullptr;
+    return *t;
   } else {
     Node<T> *current = Head;
     int i = 0;

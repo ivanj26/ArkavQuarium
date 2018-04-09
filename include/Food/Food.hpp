@@ -1,14 +1,22 @@
 #include "../Global.hpp"
+#include "../../main/oop.hpp"
+#include <string>
 
 #ifndef FOOD_HPP
 #define FOOD_HPP
 
+using namespace std;
 class Food{
     private:
         Location location;
+        int stateGambar;
         bool isReachBottom;  //Udah nyampe paling bawah atau ga?
     public:
         Food();
+        /*get & set */
+        int getStateGambar();
+        void setStateGambar(int);
+        void printFood(string[]);
         Food(int, int);
         bool operator!=(const Food&);
         Food& operator=(const Food&); //4 sekawan, utk operator assignment

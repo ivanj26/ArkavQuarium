@@ -9,6 +9,7 @@ using namespace std;
 
 const double speed = 50; // pixels per second
 
+string foods_move_gifs[10];
 string snail_move_gifs[10];
 string guppy_normal_gifs[30];
 string piranha_normal_gifs[10];
@@ -65,8 +66,6 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
   }
 
   /* Print player's money,etc*/
-  Player::setMoney(Player::getMoney() + aquarium.getSnail().getAmountCoin());
-  aquarium.getSnail().setAmountCoin(0);
   Player::printMoney();
 
   /* Update semua fish, food, dan coin*/
@@ -79,8 +78,16 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       guppy = nullptr;
       delete guppy;
     } else {
-
+      Piranha *piranha = dynamic_cast<Piranha*> (aquarium.getFishes().getIndex(i));
+      piranha->printFish(piranha_normal_gifs, piranha_normal_gifs);
+      piranha = nullptr;
+      delete piranha;
     }
+  }
+
+  for (int i = 0; i < aquarium.getFoods().getCurrentSize(); i++){
+      Food food = (aquarium.getFoods().getIndex(i));
+      food.printFood(foods_move_gifs);
   }
 
   update_screen();
@@ -92,13 +99,14 @@ int main( int argc, char* args[] )
 
     bool running = true;
     double prevtime = time_since_start();
-    bool unlockFish[] = {true, true, false, false, false, false, true};
+    bool unlockFish[] = {true, true, false, true, false, false, true};
     int x[] = {48,117,186,247,320,393,466};
 
     //Catet nama file guppy gif, piranha gif, dan gif lain
     string DIR_GUPPY_NORMAL = DIR_ICONS + "Animal/GuppyNormal/";
     string DIR_GUPPY_HUNGRY = DIR_ICONS + "Animal/GuppyHungry/";
     string DIR_SNAIL_MOVE = DIR_ICONS + "Animal/SnailMove/";
+    string DIR_FOODS = DIR_ICONS + "Animal/Foods/";
     string DIR_PIRANHA_NORMAL = DIR_ICONS + "Animal/PiranhaNormal/";
     string DIR_PIRANHA_HUNGRY = DIR_ICONS + "Animal/PiranhaHungry/";
 
@@ -143,6 +151,17 @@ int main( int argc, char* args[] )
       }
   	}
 
+    dir = opendir(DIR_FOODS.c_str());
+    contains = NULL;
+    while(pdir=readdir(dir))
+    {
+      contains = strstr (pdir->d_name, gif);
+      if (contains){
+        int idx = int(pdir->d_name[4]) - 48;
+        foods_move_gifs[idx] = DIR_FOODS + pdir->d_name;
+      }
+    }
+
     int i = 0;
   	closedir(dir);
 
@@ -166,14 +185,33 @@ int main( int argc, char* args[] )
                 int y_mouse = get_mouse_y();
 
                 if ((x_mouse <= x[0]+20 && x_mouse >= x[0]-20) && (y_mouse <= 45 && y_mouse >= 5)){
-                  //Bila ingin membeli guppy
-                  cout << "Buy guppy!" << endl;
+                  if (Player::getMoney() >= PRC_GUPPY){
+                      Player::setMoney(Player::getMoney() - PRC_GUPPY);
+                      Guppy* g = new Guppy();
+                      g->setX(generateRandom(40, SCREEN_WIDTH-40));
+                      g->setY(generateRandom(115, SCREEN_HEIGHT-40));
+                      aquarium.getFishes().add(g);
+                      g = nullptr;
+                      delete g;
+                  }
                 } else if ((x_mouse <= x[1]+20 && x_mouse >= x[1]-20) && (y_mouse <= 45 && y_mouse >= 5)) {
-                  //Bila ingin membeli food
-                  cout << "Buy food!" << endl;
+                  if (Player::getMoney() >= PRC_FOOD){
+                      Player::setMoney(Player::getMoney() - PRC_FOOD);
+                      Food f;
+                      f.setX(generateRandom(40, SCREEN_WIDTH-40));
+                      f.setY(115);
+                      aquarium.getFoods().add(f);
+                  }
                 } else if ((x_mouse <= x[3]+20 && x_mouse >= x[3]-20) && (y_mouse <= 45 && y_mouse >= 5) && unlockFish[3]){
-                  //Bila ingin membeli piranha
-                  cout << "Buy piranha!" << endl;
+                  if (Player::getMoney() >= PRC_PIRANHA){
+                      Player::setMoney(Player::getMoney() - PRC_PIRANHA);
+                      Piranha *p = new Piranha();
+                      p->setX(generateRandom(40, SCREEN_WIDTH-40));
+                      p->setY(generateRandom(115, SCREEN_HEIGHT-40));
+                      aquarium.getFishes().add(p);
+                      p = nullptr;
+                      delete p;
+                  }
                 } else if ((x_mouse <= x[6]+20 && x_mouse >= x[6]-20) && (y_mouse <= 45 && y_mouse >= 5) && unlockFish[6]){
                   //Bila ingin membeli telur
                   cout << "Buy egg!" << endl;
@@ -196,7 +234,7 @@ int main( int argc, char* args[] )
         //         break;
         //     }
         // }
-        SDL_Delay(40);
+        SDL_Delay(50);
         updateAll(now, deltatime, unlockFish, x, i, aquarium);
     }
 

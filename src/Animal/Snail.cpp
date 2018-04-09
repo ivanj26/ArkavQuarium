@@ -4,6 +4,7 @@ Snail::Snail(){
   location.x = generateRandom(40, SCREEN_WIDTH-40);
   location.y = SCREEN_HEIGHT - 40;
   amountCoin = 0;
+  stateGambar = 0;
 }
 
 Snail& Snail::operator=(const Snail& s){//4 sekawan, untuk operator assignment
@@ -23,7 +24,7 @@ void Snail::insertCoin(Coin c){
 
 /*degree selalu 180 atau 0*/
 void Snail::Move(double degree, double deltatime){
-  bool isInsideX = ((location.x + int(SPEED_SNAIL * deltatime * cos(degree * (M_PI / 180)))) <= SCREEN_WIDTH - 40);
+  bool isInsideX = ((location.x + int(SPEED_SNAIL * deltatime * cos(degree * (M_PI / 180)))) >= 40) && ((location.x + int(SPEED_SNAIL * deltatime * cos(degree * (M_PI / 180)))) <= SCREEN_WIDTH - 40);
 
   while (!(isInsideX)){
     /*Cari arah baru, karena mau lewatin aquarium*/

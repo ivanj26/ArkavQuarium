@@ -5,6 +5,7 @@ Fish::Fish():intervalToDie(INTERVAL_TO_DIE), intervalFull(INTERVAL_FULL){
   isFull = true;
   stateGambar = 0;
   hungerTime = INTERVAL_FULL;
+  directionTo = 0;
   // location.x = random
   // location.y = random
 }
@@ -15,6 +16,14 @@ void Fish::setStateGambar(int x){
 
 int Fish::getStateGambar(){
   return stateGambar;
+}
+
+void Fish::setID(int ID){
+  this->ID = ID;
+}
+
+int Fish::getID(){
+  return ID;
 }
 
 void Fish::Eat(){}

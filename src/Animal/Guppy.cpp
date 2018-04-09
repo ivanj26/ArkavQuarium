@@ -7,6 +7,7 @@ Guppy::Guppy():growTo2(3), growTo3(10), intervalGenerateCoin(5000){
     growLevel = 0;
     nbFood = 0;
     coinTime = 0;
+    setID(0);
 }
 
 Guppy& Guppy::operator=(const Guppy& g){
@@ -17,7 +18,7 @@ Guppy& Guppy::operator=(const Guppy& g){
 }
 
 bool Guppy::operator!=(const Guppy& g){
-  return g.getX() == getX() && g.getY() == getY() && growLevel == g.growLevel && g.coinTime == coinTime && g.nbFood == nbFood;
+  return g.getX() != getX() || g.getY() != getY() || growLevel != g.growLevel || g.coinTime != coinTime || g.nbFood != nbFood;
 }
 
 void Guppy::printFish(string guppyNormal[], string guppyHungry[]){

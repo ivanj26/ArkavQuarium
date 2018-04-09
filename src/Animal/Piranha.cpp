@@ -4,6 +4,7 @@
 
 Piranha::Piranha(){
   eatAtLevel = -999;
+  setID(1);
 }
 
 Piranha& Piranha::operator=(const Piranha& p){

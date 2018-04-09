@@ -13,7 +13,7 @@ Food::Food(int nx, int ny){
 }
 
 bool Food::operator!=(const Food& f){
-	return location.x == f.location.x && location.y == f.location.y && isReachBottom == f.isReachBottom;
+	return location.x != f.location.x || location.y != f.location.y || isReachBottom != f.isReachBottom;
 }
 
 Food& Food::operator=(const Food& f){

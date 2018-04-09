@@ -13,6 +13,7 @@ using namespace std;
 
 class Fish{
     private:
+        int ID;
         int stateGambar;
         int directionTo;     // Lagi ngadep kemana
         Location location;
@@ -42,6 +43,12 @@ class Fish{
         void setHungerTime(long);
         long getHungerTime();
 
+        /*Get & set */
+        void setID(int);
+        int getID();
+
+        /*get and set*/
+        void setDirectionTo(int);
         int getDirectionTo();
 
         virtual void printFish(string[], string[]) = 0; //Print si ikan, ngadepnya ngikutin variable string directionTo

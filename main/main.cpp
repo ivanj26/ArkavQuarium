@@ -1,8 +1,6 @@
 #include "oop.hpp"
 #include <math.h>
-#include "../include/LinkedList/LinkedList.hpp"
-#include "../include/LinkedList/Node.hpp"
-#include "../include/Global.hpp"
+#include "../include/Aquarium.hpp"
 #include "../include/Player.hpp"
 #include <string.h>
 #include <dirent.h>

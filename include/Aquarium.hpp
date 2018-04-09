@@ -18,10 +18,10 @@ class Aquarium{
         LinkedList<Food> Foods;
     public:
         Aquarium();
-        Snail getSnail();
-        LinkedList<Fish*> getFishes();
-        LinkedList<Coin> getCoins();
-        LinkedList<Food> getFoods();
+        Snail& getSnail();
+        LinkedList<Fish*>& getFishes();
+        LinkedList<Coin>& getCoins();
+        LinkedList<Food>& getFoods();
 };
 
 #endif

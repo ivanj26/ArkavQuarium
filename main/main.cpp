@@ -12,14 +12,11 @@ const double speed = 50; // pixels per second
 
 string guppy_normal_gifs[30];
 string piranha_normal_gifs[10];
-void updateAll(double now, int deltatime, bool (&unlockFish)[7], int (&x) [7], int &j){
+void updateAll(double now, int deltatime, bool (&unlockFish)[7], int (&x) [7], int &j, Aquarium& aquarium){
   clear_screen();
   /* Draw aquarium & menu_bar to screen*/
   draw_image(DIR_ICONS + "aquarium2.jpg", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
   draw_image(DIR_ICONS + "menubar.gif" , SCREEN_WIDTH / 2, 75 / 2);
-
-  /* Print player's money,etc*/
-  Player::printMoney();
 
   /*Unlock fish (menu bar)*/
   for (int i = 0; i < 7; i++){
@@ -67,6 +64,10 @@ void updateAll(double now, int deltatime, bool (&unlockFish)[7], int (&x) [7], i
     }
   }
 
+  /* Print player's money,etc*/
+  Player::setMoney(Player::getMoney() + aquarium.getSnail().getAmountCoin());
+  aquarium.getSnail().setAmountCoin(0);
+  Player::printMoney();
   update_screen();
 }
 
@@ -79,7 +80,7 @@ int main( int argc, char* args[] )
     bool unlockFish[] = {true, true, false, false, false, false, true};
     int x[] = {48,117,186,247,320,393,466};
 
-    //Catet nama file guppy gif & piranha gif
+    //Catet nama file guppy gif, piranha gif, dan gif lain
     string DIR_GUPPY_NORMAL = DIR_ICONS + "Animal/GuppyNormal/";
     string DIR_GUPPY_HUNGRY = DIR_ICONS + "Animal/GuppyHungry/";
     string DIR_PIRANHA_NORMAL = DIR_ICONS + "Animal/PiranhaNormal/";
@@ -118,6 +119,9 @@ int main( int argc, char* args[] )
     int i = 0;
   	closedir(dir);
 
+
+    //Instantiate aquarium
+    Aquarium aquarium;
     while (running) {
         double now = time_since_start();
         double deltatime = now - prevtime;
@@ -166,7 +170,7 @@ int main( int argc, char* args[] )
         //     }
         // }
         SDL_Delay(20);
-        updateAll(now, deltatime, unlockFish, x, i);
+        updateAll(now, deltatime, unlockFish, x, i, aquarium);
     }
 
     close();

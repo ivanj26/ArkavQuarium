@@ -7,7 +7,7 @@
 #include <iostream>
 using namespace std;
 
-Aquarium::Aquarium(){
+Aquarium::Aquarium():snail(){
 	//Menginisiasi Guppy dan insert ke LinkedList of Guppy
 	Guppy *guppy= new Guppy();
 	guppy->setX(generateRandom(40,SCREEN_WIDTH-40));
@@ -17,18 +17,18 @@ Aquarium::Aquarium(){
 	delete guppy;
 }
 
-Snail Aquarium::getSnail(){
+Snail& Aquarium::getSnail(){
 	return this->snail;
 }
 
-LinkedList<Fish*> Aquarium::getFishes(){
+LinkedList<Fish*>& Aquarium::getFishes(){
 	return this->Fishes;
 }
 
-LinkedList<Coin> Aquarium::getCoins(){
+LinkedList<Coin>& Aquarium::getCoins(){
 	return this->Coins;
 }
 
-LinkedList<Food> Aquarium::getFoods(){
+LinkedList<Food>& Aquarium::getFoods(){
 	return this->Foods;
 }

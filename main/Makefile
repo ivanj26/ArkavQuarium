@@ -1,5 +1,5 @@
 # Masukkan semua file cpp Anda
-OBJS = main.cpp oop.cpp ../src/Animal/Fish.cpp ../src/Coin/Coin.cpp
+OBJS = main.cpp oop.cpp ../src/Animal/Fish.cpp ../src/Coin/Coin.cpp ../src/Animal/Guppy.cpp ../src/Animal/Piranha.cpp ../src/Animal/Snail.cpp ../src/Food/Food.cpp ../src/Aquarium/Aquarium.cpp ../src/Player.cpp
 #../src/Animal/Guppy.cpp
 
 CC = g++

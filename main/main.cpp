@@ -3,7 +3,7 @@
 #include "../include/LinkedList/LinkedList.hpp"
 #include "../include/LinkedList/Node.hpp"
 #include "../include/Global.hpp"
-#include "../src/Player.cpp"
+#include "../include/Player.hpp"
 #include <string.h>
 #include <dirent.h>
 #include <iostream>

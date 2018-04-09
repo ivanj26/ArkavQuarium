@@ -15,7 +15,7 @@ Piranha& Piranha::operator=(const Piranha& p){
 Coin Piranha::generateCoin(){
   Coin coin;
   if (eatAtLevel != -999){
-    coin.setValue(PRC_FISH * (eatAtLevel + 1));
+    coin.setValue(PRC_GUPPY * (eatAtLevel + 1));
     coin.setX(getX());
     coin.setY(getY());
     eatAtLevel = -999;
@@ -25,8 +25,8 @@ Coin Piranha::generateCoin(){
   return coin;
 }
 
-void Piranha::printFish(string[] piranhaNormal, string[] piranhaHungry[]){
-  if (isFull)
+void Piranha::printFish(string piranhaNormal[], string piranhaHungry[]){
+  if (getIsFull())
     draw_image(piranhaNormal[getStateGambar()], getX(), getY());
   else
     draw_image(piranhaHungry[getStateGambar()], getX(), getY());
@@ -50,7 +50,7 @@ void Piranha::setEatAtLevel(int eatAtLevel){
   this->eatAtLevel = eatAtLevel;
 }
 
-void Piranha::findNearestFoodOrFish(LinkedList<Guppy>& guppies){
+void Piranha::findNearestFoodOrFish(LinkedList<Guppy>& guppies, double deltatime){
   Node<Guppy>* node = guppies.getHead();
   double tempMin = sqrt(pow(getX() - node->getValue().getX(),2) + pow(getY() - node->getValue().getY(),2));
 
@@ -75,6 +75,6 @@ void Piranha::findNearestFoodOrFish(LinkedList<Guppy>& guppies){
     int deltaY = getY() - minNode->getValue().getY();
     int deltaX = getX() - minNode->getValue().getX();
 
-    Move(atan(deltaY / deltaX) * (180 / M_PI));
+    Move(atan(deltaY / deltaX) * (180 / M_PI), deltatime);
   }
 }

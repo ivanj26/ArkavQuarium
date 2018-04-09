@@ -14,14 +14,14 @@ class Aquarium{
     private:
         LinkedList<Fish*> Fishes;
         Snail snail;
-        LinkedList<Coin*> Coins;
-        LinkedList<Food*> Foods;
+        LinkedList<Coin> Coins;
+        LinkedList<Food> Foods;
     public:
         Aquarium();
         Snail getSnail();
         LinkedList<Fish*> getFishes();
-        LinkedList<Coin*> getCoins();
-        LinkedList<Food*> getFoods();
+        LinkedList<Coin> getCoins();
+        LinkedList<Food> getFoods();
 };
 
 #endif

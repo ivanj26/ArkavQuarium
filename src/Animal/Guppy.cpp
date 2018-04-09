@@ -4,7 +4,7 @@
 
 //Angka masih sembarang
 Guppy::Guppy():growTo2(3), growTo3(10), intervalGenerateCoin(5000){
-    growLevel = 0;
+    growLevel = 1;
     nbFood = 0;
     coinTime = 0;
     setID(0);

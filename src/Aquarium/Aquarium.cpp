@@ -12,15 +12,9 @@ Aquarium::Aquarium(){
 	Guppy *guppy= new Guppy();
 	guppy->setX(generateRandom(40,SCREEN_WIDTH-40));
 	guppy->setY(generateRandom(115,SCREEN_HEIGHT-40));
-	guppy->setGrowLevel(1);
-	guppy->setCoinTime(0);
-	guppy->setNbFood(0);
 	Fishes.add(guppy);
 	guppy = nullptr;
 	delete guppy;
-	//Menginisiasi Piranha
-	Piranha *piranha = new Piranha();
-
 }
 
 Snail Aquarium::getSnail(){
@@ -31,10 +25,10 @@ LinkedList<Fish*> Aquarium::getFishes(){
 	return this->Fishes;
 }
 
-LinkedList<Coin*> Aquarium::getCoins(){
+LinkedList<Coin> Aquarium::getCoins(){
 	return this->Coins;
 }
 
-LinkedList<Food*> Aquarium::getFoods(){
+LinkedList<Food> Aquarium::getFoods(){
 	return this->Foods;
 }

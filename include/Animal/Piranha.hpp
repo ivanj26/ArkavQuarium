@@ -25,7 +25,7 @@ class Piranha : public Fish{
         int getEatAtLevel()const;
         void setEatAtLevel(int);
 
-        void findNearestFoodOrFish(LinkedList<Guppy>&); //(MARK) Buat nyari makan berupa object dari class Guppy
+        void findNearestFoodOrFish(LinkedList<Guppy>&, double); //(MARK) Buat nyari makan berupa object dari class Guppy
 };
 
 #endif

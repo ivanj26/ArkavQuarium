@@ -4,6 +4,10 @@ Coin::Coin(){
 	value = 0;
 }
 
+bool Coin::operator!=(const Coin& c){
+	return location.x != c.location.x || location.y != c.location.y || value != c.value;
+}
+
 Coin& Coin::operator=(const Coin& T){//4 sekawan, untuk operator assignment
 	this->value = T.value;
 	this->location.x = T.location.x;

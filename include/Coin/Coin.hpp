@@ -9,6 +9,7 @@ class Coin{
         Location location;
     public:
         Coin();
+        bool operator!=(const Coin&);
         Coin& operator=(const Coin&);//4 sekawan, untuk operator assignment
         void Move(); //Selalu move ke bawah
 

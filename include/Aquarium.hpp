@@ -15,13 +15,13 @@ class Aquarium{
         LinkedList<Fish*> Fishes;
         Snail snail;
         LinkedList<Coin> Coins;
-        LinkedList<Food> Foods;
+        LinkedList<Food*> Foods;
     public:
         Aquarium();
         Snail& getSnail();
         LinkedList<Fish*>& getFishes();
         LinkedList<Coin>& getCoins();
-        LinkedList<Food>& getFoods();
+        LinkedList<Food*>& getFoods();
 };
 
 #endif

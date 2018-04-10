@@ -1,5 +1,8 @@
 #include "../../include/Food/Food.hpp"
 
+#include <iostream>
+using namespace std;
+
 Food::Food(){
 	stateGambar = 0;
 	this->location.x = 40;
@@ -24,9 +27,11 @@ Food& Food::operator=(const Food& f){
 
 	return *this;
 }
-void Food::Move(){
-	if (location.x < SCREEN_HEIGHT - 40){
-		setY(getY() + 1);
+void Food::Move(double deltatime){
+	if ((this->location.y + int(deltatime * SPEED_COIN_FOOD)) < SCREEN_HEIGHT - 40){
+		this->location.y += int(deltatime * SPEED_COIN_FOOD);
+	} else {
+		isReachBottom = true;
 	}
 }
 

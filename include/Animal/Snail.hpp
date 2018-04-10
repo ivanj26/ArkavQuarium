@@ -12,6 +12,8 @@ using namespace std;
 class Snail {
     private:
         Location location;
+        double timeDirection;
+        double directionTo; 
         int stateGambar;
         int amountCoin; //Banyaknya koin sekarang yang ditampung Snail
     public:
@@ -32,7 +34,8 @@ class Snail {
         /*get & set */
         int getStateGambar();
         void setStateGambar(int);
-
+        double getTimeDirection();
+        void setTimeDirection(double);
         /*Get & Set amountCoin*/
         void setAmountCoin(int);
         int getAmountCoin()const;

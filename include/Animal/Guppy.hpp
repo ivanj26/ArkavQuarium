@@ -35,7 +35,7 @@ class Guppy : public Fish{
         int getGrowLevel() const;
         void setGrowLevel(int);
 
-        void findNearestFoodOrFish(LinkedList<Food>&,double); //(MARK) Buat nyari makan
+        void findNearestFoodOrFish(LinkedList<Food*>&,double); //(MARK) Buat nyari makan
         /*Euclidean distance r = sqrt(x^2 + y^2)*/
 };
 

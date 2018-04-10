@@ -6,7 +6,6 @@
 #ifndef FISH_HPP
 #define FISH_HPP
 
-#define INTERVAL_TIME_DIRECTION 2000
 #define INTERVAL_TO_DIE 8000 //8000 ms
 #define INTERVAL_FULL 10000 //10000 ms
 

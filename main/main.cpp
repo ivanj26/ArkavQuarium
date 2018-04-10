@@ -5,10 +5,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <iostream>
-#include <pthread.h>
 using namespace std;
-
-const double speed = 50; // pixels per second
 
 string foods_move_gifs[10];
 string snail_move_gifs[10];
@@ -76,11 +73,11 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       Guppy *guppy = dynamic_cast<Guppy*> (aquarium.getFishes().getIndex(i));
       guppy->printFish(guppy_normal_gifs, guppy_normal_gifs);
 
-      if (aquarium.getFoods().getCurrentSize() == 0){
+      if (aquarium.getFoods().getCurrentSize() == 0 || guppy->getIsFull()){
         if (guppy->getTimeDirection() <= 0){
           guppy->setTimeDirection(-1);
         } else {
-          guppy->setTimeDirection(guppy->getTimeDirection() - 1000);
+          guppy->setTimeDirection(guppy->getTimeDirection() - 500);
         }
         guppy->Move(generateRandom(0,360), deltatime);
       } else if (aquarium.getFoods().getCurrentSize() > 0 && !guppy->getIsFull()){
@@ -92,7 +89,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       Piranha *piranha = dynamic_cast<Piranha*> (aquarium.getFishes().getIndex(i));
       piranha->printFish(piranha_normal_gifs, piranha_normal_gifs);
 
-      if (aquarium.getFoods().getCurrentSize() == 0){
+      if (aquarium.getFoods().getCurrentSize() == 0 || piranha->getIsFull()){
         piranha->Move(generateRandom(0,360), deltatime);
       } else if (aquarium.getFoods().getCurrentSize() > 0 && !piranha->getIsFull()){
         piranha->findNearestFoodOrFish(aquarium.getFishes(), deltatime);
@@ -103,13 +100,23 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
     }
   }
 
+  /*Move foods*/
   for (int i = 0; i < aquarium.getFoods().getCurrentSize(); i++){
-      Food food = (aquarium.getFoods().getIndex(i));
-      food.printFood(foods_move_gifs);
+    if (aquarium.getFoods().getIndex(i)->getIsReachBottom()){
+      aquarium.getFoods().remove(i);
+    } else {
+      aquarium.getFoods().getIndex(i)->printFood(foods_move_gifs);
+      aquarium.getFoods().getIndex(i)->Move(deltatime);
+    }
   }
 
   /*Move Snail, etc*/
   if (aquarium.getCoins().getCurrentSize() == 0){
+    if (aquarium.getSnail().getTimeDirection() <= 0){
+      aquarium.getSnail().setTimeDirection(-1);
+    } else {
+      aquarium.getSnail().setTimeDirection(aquarium.getSnail().getTimeDirection() - 70);
+    }
     aquarium.getSnail().Move(double(round(generateRandom(0,180))), deltatime);
   } else {
     aquarium.getSnail().findNearestCoin(aquarium.getCoins(), deltatime);
@@ -219,13 +226,15 @@ int main( int argc, char* args[] )
                       g = nullptr;
                       delete g;
                   }
-                } else if ((x_mouse <= x[1]+20 && x_mouse >= x[1]-20) && (y_mouse <= 45 && y_mouse >= 5)) {
+                } else if ((x_mouse <= SCREEN_WIDTH-40 && x_mouse >= 40) && (y_mouse <= SCREEN_HEIGHT-40 && y_mouse >= 115)) {
                   if (Player::getMoney() >= PRC_FOOD){
                       Player::setMoney(Player::getMoney() - PRC_FOOD);
-                      Food f;
-                      f.setX(generateRandom(40, SCREEN_WIDTH-40));
-                      f.setY(115);
+                      Food *f = new Food();
+                      f->setX(x_mouse);
+                      f->setY(y_mouse);
                       aquarium.getFoods().add(f);
+                      f = nullptr;
+                      delete f;
                   }
                 } else if ((x_mouse <= x[3]+20 && x_mouse >= x[3]-20) && (y_mouse <= 45 && y_mouse >= 5) && unlockFish[3]){
                   if (Player::getMoney() >= PRC_PIRANHA){

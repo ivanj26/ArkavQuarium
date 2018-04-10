@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Node.hpp"
 
+using namespace std;
 #ifndef LL_HPP
 #define LL_HPP
 
@@ -25,6 +26,7 @@ class LinkedList{
         int find(T);
         void add(T);
         void remove(T);
+        void remove(int);
         T getIndex(int);
 };
 
@@ -119,6 +121,43 @@ void LinkedList<T>::add(T value){
       Head->setNext(node);
   }
   currentSize++;
+}
+
+template <class T>
+void LinkedList<T>::remove(int idx){
+  if (idx < currentSize){
+    if (idx == 0 && currentSize == 1){
+      delete Head;
+    } else if (idx == 0 && currentSize > 1){
+      Node<T>* next = Head->getNext();
+      next->setPrev(NULL);
+      delete Head;
+      Head = next;
+    } else {
+      cout << idx << endl;
+      for (int i = 0; i < idx; i++){
+        Head = Head->getNext();
+      }
+
+      Node<T> *prev = Head->getPrev();
+      Node<T> *next = Head->getNext();
+
+      if (next != NULL){
+        next->setPrev(prev);
+      } else {
+        prev->setNext(NULL);
+      }
+
+      Head = NULL;
+      delete Head;
+      Head = prev;
+
+      for (int i = 0; i < idx-1; i++){
+        Head = Head->getPrev();
+      }
+    }
+    currentSize--;
+  }
 }
 
 template <class T>

@@ -37,6 +37,6 @@ LinkedList<Coin>& Aquarium::getCoins(){
 	return this->Coins;
 }
 
-LinkedList<Food>& Aquarium::getFoods(){
+LinkedList<Food*>& Aquarium::getFoods(){
 	return this->Foods;
 }

@@ -1,6 +1,7 @@
 #ifndef GLOBAL_HPP
 #define GLOBAL_HPP
 
+#define INTERVAL_TIME_DIRECTION 2000
 #define SPEED_COIN_FOOD     80
 #define SPEED_FISH_NORMAL   87
 #define SPEED_SNAIL         60

@@ -24,11 +24,11 @@ Coin* Piranha::generateCoin(){
   return coin;
 }
 
-void Piranha::printFish(string piranhaNormal[], string piranhaHungry[]){
+void Piranha::printFish(string piranhaNormal[]){
   if (getIsFull())
     draw_image(piranhaNormal[getStateGambar()], getX(), getY());
   else
-    draw_image(piranhaHungry[getStateGambar()], getX(), getY());
+    draw_image(piranhaNormal[getStateGambar()], getX(), getY());
 
   if (getStateGambar() != 9)
     setStateGambar(getStateGambar() + 1);

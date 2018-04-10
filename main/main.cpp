@@ -9,7 +9,7 @@ using namespace std;
 
 string foods_move_gifs[10];
 string snail_move_gifs[10];
-string guppy_normal_gifs[30];
+string guppy_gifs[120];
 string piranha_normal_gifs[10];
 void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7], int &j, Aquarium& aquarium){
   clear_screen();
@@ -23,7 +23,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       draw_image(DIR_ICONS + "mbuttonu.gif", x[i], 25);
       switch(i){
         case 0:
-          draw_image(guppy_normal_gifs[j], x[i] , 25);
+          draw_image(guppy_gifs[j], x[i] , 25);
           draw_text("$" + to_string(PRC_GUPPY), 12, x[i] - 15, 45, 80, 255, 25);
           break;
         case 1:
@@ -73,7 +73,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       if (guppy->getHungerTime() <= 0){
         guppy->setIsFull(false);
       }
-      guppy->printFish(guppy_normal_gifs, guppy_normal_gifs);
+      guppy->printFish(guppy_gifs);
       if (aquarium.getFoods().getCurrentSize() == 0 || guppy->getIsFull()){
         if (guppy->getTimeDirection() <= 0){
           guppy->setTimeDirection(-1);
@@ -89,7 +89,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       delete guppy;
     } else {
       Piranha *piranha = dynamic_cast<Piranha*> (aquarium.getFishes().getIndex(i));
-      piranha->printFish(piranha_normal_gifs, piranha_normal_gifs);
+      piranha->printFish(piranha_normal_gifs);
 
       if (aquarium.getFoods().getCurrentSize() == 0 || piranha->getIsFull()){
         piranha->Move(generateRandom(0,360), deltatime);
@@ -144,14 +144,13 @@ int main( int argc, char* args[] )
     int x[] = {48,117,186,247,320,393,466};
 
     //Catet nama file guppy gif, piranha gif, dan gif lain
-    string DIR_GUPPY_NORMAL = DIR_ICONS + "Animal/GuppyNormal/";
-    string DIR_GUPPY_HUNGRY = DIR_ICONS + "Animal/GuppyHungry/";
+    string DIR_guppy = DIR_ICONS + "Animal/GuppyNormal/";
     string DIR_SNAIL_MOVE = DIR_ICONS + "Animal/SnailMove/";
     string DIR_FOODS = DIR_ICONS + "Animal/Foods/";
     string DIR_PIRANHA_NORMAL = DIR_ICONS + "Animal/PiranhaNormal/";
     string DIR_PIRANHA_HUNGRY = DIR_ICONS + "Animal/PiranhaHungry/";
 
-    DIR *dir = opendir(DIR_GUPPY_NORMAL.c_str());
+    DIR *dir = opendir(DIR_guppy.c_str());
   	dirent *pdir;
     char gif[] = "gif";
     char *contains = NULL;
@@ -160,12 +159,30 @@ int main( int argc, char* args[] )
       contains = strstr (pdir->d_name, gif);
       if (contains){
         int idx = int(pdir->d_name[10]) - 48;
-        if (int(pdir->d_name[5]) == 49){
-      		guppy_normal_gifs[idx] = DIR_GUPPY_NORMAL + pdir->d_name;
-        } else if (int(pdir->d_name[5]) == 50){
-          guppy_normal_gifs[idx + 10] = DIR_GUPPY_NORMAL + pdir->d_name;
-        } else {
-          guppy_normal_gifs[idx + 20] = DIR_GUPPY_NORMAL + pdir->d_name;
+        if (int(pdir->d_name[5]) == 49 && int(pdir->d_name[8]) == 105){
+      		guppy_gifs[idx] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 50 && int(pdir->d_name[8]) == 105){
+          guppy_gifs[idx + 10] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 51 && int(pdir->d_name[8]) == 105) {
+          guppy_gifs[idx + 20] = DIR_guppy + pdir->d_name;
+        } else  if (int(pdir->d_name[5]) == 49 && int(pdir->d_name[8]) == 97){
+          guppy_gifs[idx + 30] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 50 && int(pdir->d_name[8]) == 97){
+          guppy_gifs[idx + 40] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 51 && int(pdir->d_name[8]) == 97){
+          guppy_gifs[idx + 50] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 49 && int(pdir->d_name[8]) == 98){
+          guppy_gifs[idx + 60] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 50 && int(pdir->d_name[8]) == 98){
+          guppy_gifs[idx + 70] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 51 && int(pdir->d_name[8]) == 98){
+          guppy_gifs[idx + 80] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 49 && int(pdir->d_name[8]) == 99){
+          guppy_gifs[idx + 90] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 50 && int(pdir->d_name[8]) == 99){
+          guppy_gifs[idx + 100] = DIR_guppy + pdir->d_name;
+        } else if (int(pdir->d_name[5]) == 51 && int(pdir->d_name[8]) == 99){
+          guppy_gifs[idx + 110] = DIR_guppy + pdir->d_name;
         }
       }
   	}

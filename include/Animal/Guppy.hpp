@@ -20,7 +20,7 @@ class Guppy : public Fish{
         Guppy& operator=(const Guppy&);//4 sekawan, untuk operator assignment
         bool operator!=(const Guppy&);
         Coin* generateCoin(); //override
-        void printFish(string[], string[]);
+        void printFish(string[]);
         void Eat(Food); //overloading
 
         /*Get & Set*/

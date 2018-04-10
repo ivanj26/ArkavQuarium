@@ -21,12 +21,15 @@ bool Guppy::operator!=(const Guppy& g){
   return g.getX() != getX() || g.getY() != getY() || growLevel != g.growLevel || g.coinTime != coinTime || g.nbFood != nbFood;
 }
 
-void Guppy::printFish(string guppyNormal[], string guppyHungry[]){
-    if (getIsFull())
+void Guppy::printFish(string guppyNormal[]){
+    if (getIsFull() && (getDirectionTo() > 90 && getDirectionTo() < 270))
       draw_image(guppyNormal[getStateGambar() + ((growLevel - 1) * 10)], getX(), getY());
-    else
-      draw_image(guppyHungry[getStateGambar() + ((growLevel - 1) * 10)], getX(), getY());
-
+    else if (getIsFull() && (getDirectionTo() <= 90 || getDirectionTo() >= 270))
+      draw_image(guppyNormal[30 + (getStateGambar() + ((growLevel - 1) * 10))], getX(), getY());
+    else if (!getIsFull() && (getDirectionTo() > 90 && getDirectionTo() < 270))
+      draw_image(guppyNormal[60 + (getStateGambar() + ((growLevel - 1) * 10))], getX(), getY());
+    else if (!getIsFull() && (getDirectionTo() <= 90 || getDirectionTo() >= 270))
+      draw_image(guppyNormal[90 + (getStateGambar() + ((growLevel - 1) * 10))], getX(), getY());
     if (getStateGambar() != 9)
       setStateGambar(getStateGambar() + 1);
     else

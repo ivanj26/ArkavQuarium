@@ -1,7 +1,10 @@
 #include "../../include/Coin/Coin.hpp"
 
 Coin::Coin(){
+	location.x = 0;
+	location.y = 0;
 	value = 0;
+	stateGambar = 0;
 }
 
 bool Coin::operator!=(const Coin& c){
@@ -14,10 +17,12 @@ Coin& Coin::operator=(const Coin& T){//4 sekawan, untuk operator assignment
 	this->location.y = T.location.y;
 	return *this;
 }
-void Coin::Move(){
+void Coin::Move(double deltatime){
 	//MARK -> ukuran coin belum tau, harus ada koreksi nilai lagi
-	if (location.y < SCREEN_HEIGHT){
-		location.y++;
+	bool isInsideY = ((location.y + int(SPEED_COIN_FOOD * deltatime * sin(M_PI / 180))) < SCREEN_HEIGHT - 40);
+
+	if (isInsideY){
+		location.y += 1;
 	}
 } //Selalu move ke bawah
 
@@ -43,4 +48,21 @@ void Coin::setX(int x){
 }
 void Coin::setY(int y){
 	location.y = y;
+}
+
+void Coin::printCoin(string coins[]){
+	if (value == SILVER)
+    draw_image(coins[getStateGambar()], getX(), getY());
+  else if (value == GOLD)
+    draw_image(coins[getStateGambar()+10], getX(), getY());
+
+  if (getStateGambar() != 9)
+    setStateGambar(getStateGambar() + 1);
+  else
+    setStateGambar(0);
+}
+
+int Coin::getStateGambar(){return stateGambar;}
+void Coin::setStateGambar(int i){
+  stateGambar = i;
 }

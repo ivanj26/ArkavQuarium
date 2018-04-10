@@ -43,15 +43,15 @@ Coin* Guppy::generateCoin(){
             coin = new Coin();
             coin->setY(getY());
             coin->setX(getX());
-            coin->setValue(100);
-            setCoinTime(0);
+            coin->setValue(SILVER);
+            coin->setStateGambar(0);
         break;
         default: //Level 3
-            new Coin();
+            coin = new Coin();
             coin->setY(getY());
             coin->setX(getX());
-            coin->setValue(200);
-            setCoinTime(0);
+            coin->setValue(GOLD);
+            coin->setStateGambar(0);
     }
     return coin;
 }
@@ -80,11 +80,11 @@ int Guppy::getNbFood()const{
     return nbFood;
 }
 
-void Guppy::setCoinTime(long coinTime){
+void Guppy::setCoinTime(double coinTime){
     this->coinTime = coinTime;
 }
 
-long Guppy::getCoinTime(){
+double Guppy::getCoinTime(){
     return coinTime;
 }
 

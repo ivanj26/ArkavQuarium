@@ -10,7 +10,8 @@ using namespace std;
 string foods_move_gifs[10];
 string snail_move_gifs[20];
 string guppy_gifs[120];
-string piranha_normal_gifs[10];
+string PIRANHA_gifs[10];
+string coins_gifs[20];
 void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7], int &j, Aquarium& aquarium){
   clear_screen();
   /* Draw aquarium & menu_bar to screen*/
@@ -33,7 +34,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
         case 2:
           break;
         case 3:
-          draw_image(piranha_normal_gifs[j], x[i], 25);
+          draw_image(PIRANHA_gifs[j], x[i], 25);
           draw_text("$" + to_string(PRC_PIRANHA), 12, x[i] - 17, 45, 80, 255, 35);
           break;
         case 4:
@@ -66,14 +67,18 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
   /* Print player's money,etc*/
   Player::printMoney();
 
-  /* Update semua fish, food, dan coin*/
+  /* Update semua fish yang generate food dan coin*/
   for (int i = 0; i < aquarium.getFishes().getCurrentSize(); i++){
     if (aquarium.getFishes().getHead()->getValue()->getID() == 0){
       Guppy *guppy = dynamic_cast<Guppy*> (aquarium.getFishes().getIndex(i));
+
+      //Hunger time
       if (guppy->getHungerTime() <= 0){
         guppy->setIsFull(false);
       }
+
       guppy->printFish(guppy_gifs);
+
       if (aquarium.getFoods().getCurrentSize() == 0 || guppy->getIsFull()){
         if (guppy->getTimeDirection() <= 0){
           guppy->setTimeDirection(-1);
@@ -85,11 +90,20 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       } else if (aquarium.getFoods().getCurrentSize() > 0 && !guppy->getIsFull()){
         guppy->findNearestFoodOrFish(aquarium.getFoods(), deltatime);
       }
+
+      //Coin time
+      if (guppy->getCoinTime() <= 0 && guppy->getGrowLevel() >= 2){
+        aquarium.getCoins().add(guppy->generateCoin());
+        guppy->setCoinTime(guppy->intervalGenerateCoin);
+      } else if (guppy->getGrowLevel() >= 2) {
+        guppy->setCoinTime(guppy->getCoinTime() - 200);
+      }
+
       guppy = nullptr;
       delete guppy;
     } else {
       Piranha *piranha = dynamic_cast<Piranha*> (aquarium.getFishes().getIndex(i));
-      piranha->printFish(piranha_normal_gifs);
+      piranha->printFish(PIRANHA_gifs);
 
       if (aquarium.getFoods().getCurrentSize() == 0 || piranha->getIsFull()){
         piranha->Move(generateRandom(0,360), deltatime);
@@ -113,10 +127,10 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
   }
 
   /*Move coins*/
-  // for (int i = 0; i < aquarium.getCoins().getCurrentSize(); i++){
-  //   aquarium.getCoins().getIndex(i)->printCoin(coins_move_gifs);
-  //   aquarium.getCoins().getIndex(i)->Move(deltatime);
-  // }
+  for (int i = 0; i < aquarium.getCoins().getCurrentSize(); i++){
+    aquarium.getCoins().getIndex(i)->printCoin(coins_gifs);
+    aquarium.getCoins().getIndex(i)->Move(deltatime);
+  }
 
   /*Move Snail*/
   aquarium.getSnail().printSnail(snail_move_gifs);
@@ -126,7 +140,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
     } else {
       aquarium.getSnail().setTimeDirection(aquarium.getSnail().getTimeDirection() - 70);
     }
-    aquarium.getSnail().Move(double(round(generateRandom(0,180))), deltatime);
+    aquarium.getSnail().Move(generateRandom(0,180), deltatime);
   } else {
     aquarium.getSnail().findNearestCoin(aquarium.getCoins(), deltatime);
   }
@@ -147,8 +161,8 @@ int main( int argc, char* args[] )
     string DIR_guppy = DIR_ICONS + "Animal/GuppyNormal/";
     string DIR_SNAIL_MOVE = DIR_ICONS + "Animal/SnailMove/";
     string DIR_FOODS = DIR_ICONS + "Animal/Foods/";
-    string DIR_PIRANHA_NORMAL = DIR_ICONS + "Animal/PiranhaNormal/";
-    string DIR_PIRANHA_HUNGRY = DIR_ICONS + "Animal/PiranhaHungry/";
+    string DIR_PIRANHA = DIR_ICONS + "Animal/PiranhaNormal/";
+    string DIR_COINS = DIR_ICONS + "Animal/Coin/";
 
     DIR *dir = opendir(DIR_guppy.c_str());
   	dirent *pdir;
@@ -187,14 +201,14 @@ int main( int argc, char* args[] )
       }
   	}
 
-    dir = opendir(DIR_PIRANHA_NORMAL.c_str());
+    dir = opendir(DIR_PIRANHA.c_str());
     contains = NULL;
   	while(pdir=readdir(dir))
   	{
       contains = strstr (pdir->d_name, gif);
       if (contains){
         int idx = int(pdir->d_name[11]) - 48;
-    		piranha_normal_gifs[idx] = DIR_PIRANHA_NORMAL + pdir->d_name;
+    		PIRANHA_gifs[idx] = DIR_PIRANHA + pdir->d_name;
       }
   	}
 
@@ -221,6 +235,22 @@ int main( int argc, char* args[] )
       if (contains){
         int idx = int(pdir->d_name[4]) - 48;
         foods_move_gifs[idx] = DIR_FOODS + pdir->d_name;
+      }
+    }
+
+    dir = opendir(DIR_COINS.c_str());
+    contains = NULL;
+    while(pdir=readdir(dir))
+    {
+      contains = strstr (pdir->d_name, gif);
+      if (contains){
+        int idx = int(pdir->d_name[8]) - 48;
+
+        if (int(pdir->d_name[0]) == 83){
+            coins_gifs[idx] = DIR_COINS + pdir->d_name;
+        } else {
+            coins_gifs[idx+10] = DIR_COINS + pdir->d_name;
+        }
       }
     }
 

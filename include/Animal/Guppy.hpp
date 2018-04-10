@@ -13,9 +13,9 @@ class Guppy : public Fish{
         const int growTo3;
         int growLevel;
         int nbFood; //udah makan berapa banyak
-        const int intervalGenerateCoin;
-        long coinTime;
+        double coinTime;
     public:
+        const double intervalGenerateCoin;
         Guppy(); //default constructor untuk isi const growTo2 dan growTo3
         Guppy& operator=(const Guppy&);//4 sekawan, untuk operator assignment
         bool operator!=(const Guppy&);
@@ -28,8 +28,8 @@ class Guppy : public Fish{
         int getNbFood() const;
 
         /*Get & Set*/
-        long getCoinTime();
-        void setCoinTime(long); //MARK (ganti isi parameter resetCoinTime jadi setCoinTime)
+        double getCoinTime();
+        void setCoinTime(double); //MARK (ganti isi parameter resetCoinTime jadi setCoinTime)
 
         /*Get & Set*/
         int getGrowLevel() const;

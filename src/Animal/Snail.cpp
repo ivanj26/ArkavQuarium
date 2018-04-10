@@ -34,8 +34,7 @@ void Snail::Move(double degree, double deltatime){
   while (!(isInsideX)){
     /*Cari arah baru, karena mau lewatin aquarium*/
     directionTo = generateRandom(0,180);
-    directionTo = double(round(degree)) * 180;
-    isInsideX = ((location.x + int(SPEED_SNAIL * deltatime * cos(directionTo * (M_PI / 180)))) <= SCREEN_WIDTH - 40);
+    isInsideX = isInsideX = ((location.x + int(SPEED_SNAIL * deltatime * cos(directionTo * (M_PI / 180)))) >= 40) && ((location.x + int(SPEED_SNAIL * deltatime * cos(directionTo * (M_PI / 180)))) <= SCREEN_WIDTH - 40);
   }
 
   location.x += int(SPEED_SNAIL * deltatime * cos(directionTo * (M_PI / 180)));

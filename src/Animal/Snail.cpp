@@ -88,6 +88,8 @@ void Snail::findNearestCoin(LinkedList<Coin*>& Coins, double deltatime){
 int Snail::getStateGambar(){return stateGambar;}
 double Snail::getTimeDirection(){return timeDirection;}
 void Snail::setTimeDirection(double t){timeDirection = t;}
+double Snail::getDirectionTo(){return directionTo;}
+void Snail::setDirectionTo(double d){directionTo = d;}
 
 void Snail::setStateGambar(int i){
   stateGambar = i;

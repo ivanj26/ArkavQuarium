@@ -36,6 +36,8 @@ class Snail {
         void setStateGambar(int);
         double getTimeDirection();
         void setTimeDirection(double);
+        double getDirectionTo();
+        void setDirectionTo(double);
         /*Get & Set amountCoin*/
         void setAmountCoin(double);
         double getAmountCoin()const;

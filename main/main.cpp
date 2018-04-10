@@ -75,13 +75,17 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       //Hunger time
       if (guppy->getHungerTime() <= 0){
         guppy->setIsFull(false);
+        if (guppy->getHungerTime() <= -(INTERVAL_TO_DIE)){
+          aquarium.getFishes().remove(i);
+        }
       }
 
       guppy->printFish(guppy_gifs);
 
       if (aquarium.getFoods().getCurrentSize() == 0 || guppy->getIsFull()){
         if (guppy->getTimeDirection() <= 0 && guppy->getIsFull()){
-          guppy->setTimeDirection(-1);
+          guppy->setTimeDirection(INTERVAL_TIME_DIRECTION);
+          guppy->setDirectionTo(-1);
         } else {
           guppy->setTimeDirection(guppy->getTimeDirection() - 500);
         }
@@ -107,13 +111,17 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       //Hunger time
       if (piranha->getHungerTime() <= 0){
         piranha->setIsFull(false);
+        if (piranha->getHungerTime() <= -(INTERVAL_TO_DIE)){
+          aquarium.getFishes().remove(i);
+        }
       }
 
       piranha->printFish(PIRANHA_gifs);
 
-      if (aquarium.getFishes().getCurrentSize() == 0 || piranha->getIsFull()){
+      if (aquarium.getFishes().getCurrentSize() == 1 || piranha->getIsFull()){
         if (piranha->getTimeDirection() <= 0 && piranha->getIsFull()){
-          piranha->setTimeDirection(-1);
+          piranha->setTimeDirection(INTERVAL_TIME_DIRECTION);
+          piranha->setDirectionTo(-1);
         } else {
           piranha->setTimeDirection(piranha->getTimeDirection() - 500);
         }
@@ -153,7 +161,8 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
   aquarium.getSnail().printSnail(snail_move_gifs);
   if (aquarium.getCoins().getCurrentSize() == 0){
     if (aquarium.getSnail().getTimeDirection() <= 0){
-      aquarium.getSnail().setTimeDirection(-1);
+      aquarium.getSnail().setTimeDirection(INTERVAL_TIME_DIRECTION);
+      aquarium.getSnail().setDirectionTo(-1);
     } else {
       aquarium.getSnail().setTimeDirection(aquarium.getSnail().getTimeDirection() - 70);
     }

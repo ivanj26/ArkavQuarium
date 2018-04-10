@@ -95,7 +95,11 @@ void Snail::setStateGambar(int i){
 }
 
 void Snail::printSnail(string snail_move[]){
-  draw_image(snail_move[getStateGambar()], getX(), getY());
+  if (directionTo > 90 && directionTo < 270)
+    draw_image(snail_move[getStateGambar()+10], getX(), getY());
+  else if (directionTo <= 90 || directionTo >= 270)
+    draw_image(snail_move[getStateGambar()], getX(), getY());
+
   if (getStateGambar() != 9)
     setStateGambar(getStateGambar() + 1);
   else

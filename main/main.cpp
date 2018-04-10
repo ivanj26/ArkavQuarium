@@ -8,7 +8,7 @@
 using namespace std;
 
 string foods_move_gifs[10];
-string snail_move_gifs[10];
+string snail_move_gifs[20];
 string guppy_gifs[120];
 string piranha_normal_gifs[10];
 void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7], int &j, Aquarium& aquarium){
@@ -205,7 +205,11 @@ int main( int argc, char* args[] )
       contains = strstr (pdir->d_name, gif);
       if (contains){
         int idx = int(pdir->d_name[9]) - 48;
-    	  snail_move_gifs[idx] = DIR_SNAIL_MOVE + pdir->d_name;
+        if (int(pdir->d_name[3]) == 97){
+            snail_move_gifs[idx] = DIR_SNAIL_MOVE + pdir->d_name;
+        } else {
+            snail_move_gifs[idx+10] = DIR_SNAIL_MOVE + pdir->d_name;
+        }
       }
   	}
 

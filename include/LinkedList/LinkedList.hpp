@@ -134,7 +134,6 @@ void LinkedList<T>::remove(int idx){
       delete Head;
       Head = next;
     } else {
-      cout << idx << endl;
       for (int i = 0; i < idx; i++){
         Head = Head->getNext();
       }
@@ -144,6 +143,7 @@ void LinkedList<T>::remove(int idx){
 
       if (next != NULL){
         next->setPrev(prev);
+        prev->setNext(next);
       } else {
         prev->setNext(NULL);
       }

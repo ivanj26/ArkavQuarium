@@ -67,18 +67,20 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
   Player::printMoney();
 
   /* Update semua fish, food, dan coin*/
-  aquarium.getSnail().printSnail(snail_move_gifs);
   for (int i = 0; i < aquarium.getFishes().getCurrentSize(); i++){
     if (aquarium.getFishes().getHead()->getValue()->getID() == 0){
       Guppy *guppy = dynamic_cast<Guppy*> (aquarium.getFishes().getIndex(i));
+      if (guppy->getHungerTime() <= 0){
+        guppy->setIsFull(false);
+      }
       guppy->printFish(guppy_normal_gifs, guppy_normal_gifs);
-
       if (aquarium.getFoods().getCurrentSize() == 0 || guppy->getIsFull()){
         if (guppy->getTimeDirection() <= 0){
           guppy->setTimeDirection(-1);
         } else {
           guppy->setTimeDirection(guppy->getTimeDirection() - 500);
         }
+        guppy->setHungerTime(guppy->getHungerTime() - 100);
         guppy->Move(generateRandom(0,360), deltatime);
       } else if (aquarium.getFoods().getCurrentSize() > 0 && !guppy->getIsFull()){
         guppy->findNearestFoodOrFish(aquarium.getFoods(), deltatime);
@@ -110,7 +112,14 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
     }
   }
 
-  /*Move Snail, etc*/
+  /*Move coins*/
+  // for (int i = 0; i < aquarium.getCoins().getCurrentSize(); i++){
+  //   aquarium.getCoins().getIndex(i)->printCoin(coins_move_gifs);
+  //   aquarium.getCoins().getIndex(i)->Move(deltatime);
+  // }
+
+  /*Move Snail*/
+  aquarium.getSnail().printSnail(snail_move_gifs);
   if (aquarium.getCoins().getCurrentSize() == 0){
     if (aquarium.getSnail().getTimeDirection() <= 0){
       aquarium.getSnail().setTimeDirection(-1);

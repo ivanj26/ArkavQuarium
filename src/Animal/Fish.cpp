@@ -83,7 +83,7 @@ void Fish::setHungerTime(long hungerTime){
     this->hungerTime = hungerTime;
 }
 
-long Fish::getHungerTime(){
+double Fish::getHungerTime(){
     return hungerTime;
 }
 

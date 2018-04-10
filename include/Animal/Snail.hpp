@@ -13,7 +13,7 @@ class Snail {
     private:
         Location location;
         double timeDirection;
-        double directionTo; 
+        double directionTo;
         int stateGambar;
         int amountCoin; //Banyaknya koin sekarang yang ditampung Snail
     public:
@@ -39,6 +39,6 @@ class Snail {
         /*Get & Set amountCoin*/
         void setAmountCoin(int);
         int getAmountCoin()const;
-        void findNearestCoin(LinkedList<Coin>,double);
+        void findNearestCoin(LinkedList<Coin*>&,double);
 };
 #endif

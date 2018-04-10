@@ -12,15 +12,14 @@ Piranha& Piranha::operator=(const Piranha& p){
   return *this;
 }
 
-Coin Piranha::generateCoin(){
-  Coin coin;
+Coin* Piranha::generateCoin(){
+  Coin* coin = NULL;
   if (eatAtLevel != -999){
-    coin.setValue(PRC_GUPPY * (eatAtLevel + 1));
-    coin.setX(getX());
-    coin.setY(getY());
+    coin = new Coin();
+    coin->setValue(PRC_GUPPY * (eatAtLevel + 1));
+    coin->setX(getX());
+    coin->setY(getY());
     eatAtLevel = -999;
-  } else {
-    coin.setValue(0);
   }
   return coin;
 }
@@ -53,20 +52,22 @@ void Piranha::setEatAtLevel(int eatAtLevel){
 void Piranha::findNearestFoodOrFish(LinkedList<Fish*>& fishes, double deltatime){
   Node<Fish*>* node = fishes.getHead();
 
+  int j = 0;
   while (node->getValue()->getID() != 0){
     node = node->getNext();
+    j++;
   }
 
   double tempMin = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
   Node<Fish*> *minNode = node;
 
-  if (tempMin == 0){ //Makanan tepat di posisi piranha
+  if (tempMin <= 40){ //Makanan tepat di posisi piranha
     Guppy *guppy = dynamic_cast<Guppy*>(minNode->getValue());
     Eat(*guppy);
-    fishes.remove(minNode->getValue());
+    fishes.remove(j);
   } else {
-    int i = 1;
-    while (tempMin != 0 && i < fishes.getCurrentSize() && node->getValue()->getID() != 0){
+    int i = j+1;
+    while (i < fishes.getCurrentSize() && node->getValue()->getID() != 0){
       node = node->getNext();
       double temp = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
       if (tempMin >  temp){

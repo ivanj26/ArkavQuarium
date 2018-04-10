@@ -19,7 +19,7 @@ class Fish{
         double directionTo;     // Lagi ngadep kemana
         Location location;
         bool isFull;            // Lagi kenyang(?)
-        long hungerTime;
+        double hungerTime;
         const int intervalToDie;      // Batas waktu dia harus nyari makan
         const int intervalFull;       // Batas waktu dia kenyang berapa lama
     public:
@@ -28,7 +28,7 @@ class Fish{
         void setTimeDirection(double);
         int getStateGambar();
         void setStateGambar(int);
-        virtual Coin generateCoin() = 0; //Method Override, didefinisikan di class turunannya
+        virtual Coin* generateCoin() = 0; //Method Override, didefinisikan di class turunannya
         void Eat();             // Method Overloading, dia makannya makan apa(?) definisiin saat di class turunannya
         void Move(double,double);         // MARK perubahan tipe parameter
 
@@ -44,7 +44,7 @@ class Fish{
 
         /*Get & Set LifeTime*/
         void setHungerTime(long);
-        long getHungerTime();
+        double getHungerTime();
 
         /*Get & set */
         void setID(int);

@@ -33,7 +33,7 @@ LinkedList<Fish*>& Aquarium::getFishes(){
 	return this->Fishes;
 }
 
-LinkedList<Coin>& Aquarium::getCoins(){
+LinkedList<Coin*>& Aquarium::getCoins(){
 	return this->Coins;
 }
 

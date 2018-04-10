@@ -56,20 +56,20 @@ int Snail::getAmountCoin()const{
   return amountCoin;
 }
 
-void Snail::findNearestCoin(LinkedList<Coin> Coins, double deltatime){
-  Node<Coin> *node = Coins.getHead();
-  double tempMin = sqrt(pow(getX() - node->getValue().getX(),2) + pow(getY() - node->getValue().getY(),2));
+void Snail::findNearestCoin(LinkedList<Coin*>& Coins, double deltatime){
+  Node<Coin*> *node = Coins.getHead();
+  double tempMin = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
 
   if (tempMin == 0){ //Coin tepat di posisi snail
-    insertCoin(node->getValue());
+    insertCoin(*node->getValue());
     Coins.remove(node->getValue());
   } else {
       int i = 1;
-      Node<Coin> *minNode = Coins.getHead();
+      Node<Coin*> *minNode = Coins.getHead();
 
       while (tempMin != 0 && i < Coins.getCurrentSize()){
         node = node->getNext();
-        double temp = sqrt(pow(getX() - node->getValue().getX(),2) + pow(getY() - node->getValue().getY(),2));
+        double temp = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
         if (tempMin >  temp){
           tempMin = temp;
           minNode = node;
@@ -78,8 +78,8 @@ void Snail::findNearestCoin(LinkedList<Coin> Coins, double deltatime){
       }
 
       //Bergerak ke arah coin terdekat
-      int deltaY = getY() - minNode->getValue().getY();
-      int deltaX = getX() - minNode->getValue().getX();
+      int deltaY = getY() - minNode->getValue()->getY();
+      int deltaX = getX() - minNode->getValue()->getX();
 
       double degree = atan(deltaY / deltaX) * (180 / M_PI);
       Move(double(round(degree)) * 180, deltatime);

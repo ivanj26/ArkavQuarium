@@ -17,7 +17,7 @@ class Piranha : public Fish{
     public:
         Piranha();
         Piranha& operator=(const Piranha&); //4 sekawan, untuk operator assignment
-        Coin generateCoin();    //Override dari class Fish
+        Coin* generateCoin();    //Override dari class Fish
         void Eat(Guppy);        //Overloading dari class Fish
         void printFish(string[], string[]);
 

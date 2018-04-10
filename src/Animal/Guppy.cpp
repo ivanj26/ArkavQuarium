@@ -23,9 +23,9 @@ bool Guppy::operator!=(const Guppy& g){
 
 void Guppy::printFish(string guppyNormal[], string guppyHungry[]){
     if (getIsFull())
-      draw_image(guppyNormal[getStateGambar() + ((growLevel - 1) * 9)], getX(), getY());
+      draw_image(guppyNormal[getStateGambar() + ((growLevel - 1) * 10)], getX(), getY());
     else
-      draw_image(guppyHungry[getStateGambar() + ((growLevel - 1) * 9)], getX(), getY());
+      draw_image(guppyHungry[getStateGambar() + ((growLevel - 1) * 10)], getX(), getY());
 
     if (getStateGambar() != 9)
       setStateGambar(getStateGambar() + 1);
@@ -33,22 +33,23 @@ void Guppy::printFish(string guppyNormal[], string guppyHungry[]){
       setStateGambar(0);
 }
 
-Coin Guppy::generateCoin(){
-    Coin coin;
-    coin.setY(getY());
-    coin.setX(getX());
+Coin* Guppy::generateCoin(){
+    Coin* coin = NULL;
     switch(growLevel){
-        case 1: //Level 1
-            coin.setValue(0);
-        break;
         case 2: //Level 2
-            coin.setValue(100);
+            coin = new Coin();
+            coin->setY(getY());
+            coin->setX(getX());
+            coin->setValue(100);
+            setCoinTime(0);
         break;
         default: //Level 3
-            coin.setValue(200);
+            new Coin();
+            coin->setY(getY());
+            coin->setX(getX());
+            coin->setValue(200);
+            setCoinTime(0);
     }
-
-    setCoinTime(0);
     return coin;
 }
 
@@ -62,7 +63,9 @@ void Guppy::Eat(Food food){
           growLevel++;
         }
 
-        setHungerTime(0);
+        setIsFull(true);
+        setDirectionTo(-1);
+        setHungerTime(INTERVAL_FULL);
     }
 }
 
@@ -98,14 +101,14 @@ void Guppy::findNearestFoodOrFish(LinkedList<Food*>& foods, double deltaTime){
   Node<Food*> *node = foods.getHead();
   double tempMin = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
 
-  if (tempMin == 0){ //Makanan tepat di posisi guppy
+  if (tempMin <= 40){ //Makanan tepat di posisi guppy
     Eat(*node->getValue());
-    foods.remove(node->getValue());
+    foods.remove(0);
   } else {
       int i = 1;
       Node<Food*> *minNode = foods.getHead();
 
-      while (tempMin != 0 && i < foods.getCurrentSize()){
+      while (i < foods.getCurrentSize()){
         node = node->getNext();
         double temp = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
         if (tempMin >  temp){
@@ -119,6 +122,7 @@ void Guppy::findNearestFoodOrFish(LinkedList<Food*>& foods, double deltaTime){
       int deltaY = getY() - minNode->getValue()->getY();
       int deltaX = getX() - minNode->getValue()->getX();
 
+      setDirectionTo(-1);
       Move(atan(deltaY / deltaX) * (180 / M_PI), deltaTime);
    }
 }

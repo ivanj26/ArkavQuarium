@@ -13,7 +13,7 @@
 #define PRC_EGG_3 5000
 #define PRC_FOOD 5
 #define PRC_PIRANHA 1000
-#define INIT_MONEY 1200
+#define INIT_MONEY 200
 
 // Pengaturan ukuran layar yang dihasilkan.
 const int SCREEN_WIDTH = 640;

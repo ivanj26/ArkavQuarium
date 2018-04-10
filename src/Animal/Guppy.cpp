@@ -3,7 +3,7 @@
 #include <math.h>
 
 //Angka masih sembarang
-Guppy::Guppy():growTo2(1), growTo3(10), intervalGenerateCoin(22000){
+Guppy::Guppy():growTo2(3), growTo3(10), intervalGenerateCoin(22000){
     growLevel = 1;
     nbFood = 0;
     coinTime = 0;

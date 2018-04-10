@@ -3,7 +3,7 @@
 #include <math.h>
 
 //Angka masih sembarang
-Guppy::Guppy():growTo2(3), growTo3(10), intervalGenerateCoin(15000){
+Guppy::Guppy():growTo2(1), growTo3(10), intervalGenerateCoin(22000){
     growLevel = 1;
     nbFood = 0;
     coinTime = 0;
@@ -43,14 +43,14 @@ Coin* Guppy::generateCoin(){
             coin = new Coin();
             coin->setY(getY());
             coin->setX(getX());
-            coin->setValue(SILVER);
+            coin->setValue(double(SILVER));
             coin->setStateGambar(0);
         break;
         default: //Level 3
             coin = new Coin();
             coin->setY(getY());
             coin->setX(getX());
-            coin->setValue(GOLD);
+            coin->setValue(double(GOLD));
             coin->setStateGambar(0);
     }
     return coin;
@@ -125,7 +125,6 @@ void Guppy::findNearestFoodOrFish(LinkedList<Food*>& foods, double deltaTime){
       int deltaY = getY() - minNode->getValue()->getY();
       int deltaX = getX() - minNode->getValue()->getX();
 
-      setDirectionTo(-1);
       Move(atan(deltaY / deltaX) * (180 / M_PI), deltaTime);
    }
 }

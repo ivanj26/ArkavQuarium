@@ -14,21 +14,24 @@ Piranha& Piranha::operator=(const Piranha& p){
 
 Coin* Piranha::generateCoin(){
   Coin* coin = NULL;
-  if (eatAtLevel != -999){
     coin = new Coin();
-    coin->setValue(PRC_GUPPY * (eatAtLevel + 1));
+    coin->setValue(double(PRC_GUPPY * (eatAtLevel + 1)));
     coin->setX(getX());
     coin->setY(getY());
+    coin->setStateGambar(0);
     eatAtLevel = -999;
-  }
   return coin;
 }
 
 void Piranha::printFish(string piranhaNormal[]){
-  if (getIsFull())
-    draw_image(piranhaNormal[getStateGambar()], getX(), getY());
-  else
-    draw_image(piranhaNormal[getStateGambar()], getX(), getY());
+  if (getIsFull() && (getDirectionTo() > 90 && getDirectionTo() < 270))
+    draw_image(piranhaNormal[getStateGambar() + 10], getX(), getY());
+  else if (getIsFull() && (getDirectionTo() <= 90 || getDirectionTo() >= 270))
+    draw_image(piranhaNormal[getStateGambar() + 20], getX(), getY());
+  else if (!getIsFull() && (getDirectionTo() > 90 && getDirectionTo() < 270))
+    draw_image(piranhaNormal[getStateGambar() + 30], getX(), getY());
+  else if (!getIsFull() && (getDirectionTo() <= 90 || getDirectionTo() >= 270))
+    draw_image(piranhaNormal[getStateGambar() + 40], getX(), getY());
 
   if (getStateGambar() != 9)
     setStateGambar(getStateGambar() + 1);
@@ -38,6 +41,9 @@ void Piranha::printFish(string piranhaNormal[]){
 
 void Piranha::Eat(Guppy g){
   eatAtLevel = g.getGrowLevel();
+  setIsFull(true);
+  setDirectionTo(-1);
+  setHungerTime(INTERVAL_FULL);
 }
 
 /*Get & Set eatGuppyAtLevel*/
@@ -81,6 +87,6 @@ void Piranha::findNearestFoodOrFish(LinkedList<Fish*>& fishes, double deltatime)
     int deltaY = getY() - minNode->getValue()->getY();
     int deltaX = getX() - minNode->getValue()->getX();
 
-    Move(atan(deltaY / deltaX) * (180 / M_PI), deltatime);
+    Move(atan(deltaY / deltaX) * (180 / M_PI), deltatime * 1.5);
   }
 }

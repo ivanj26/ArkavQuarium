@@ -27,11 +27,11 @@ void Coin::Move(double deltatime){
 } //Selalu move ke bawah
 
 /*Get & Set*/
-long Coin::getValue() const{
+double Coin::getValue() const{
 	return value;
 }
 
-void Coin::setValue(long val){
+void Coin::setValue(double val){
 	value = val;
 }
 
@@ -55,6 +55,8 @@ void Coin::printCoin(string coins[]){
     draw_image(coins[getStateGambar()], getX(), getY());
   else if (value == GOLD)
     draw_image(coins[getStateGambar()+10], getX(), getY());
+	else
+		draw_image(coins[getStateGambar()+20], getX(), getY());
 
   if (getStateGambar() != 9)
     setStateGambar(getStateGambar() + 1);

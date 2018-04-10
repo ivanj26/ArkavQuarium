@@ -47,11 +47,11 @@ void Snail::setY(int y){location.y = y;}
 int Snail::getY()const{return location.y;}
 
 /*Get & Set amountCoin*/
-void Snail::setAmountCoin(long amountCoin){
+void Snail::setAmountCoin(double amountCoin){
   this->amountCoin = amountCoin;
 }
 
-long Snail::getAmountCoin()const{
+double Snail::getAmountCoin()const{
   return amountCoin;
 }
 
@@ -81,7 +81,7 @@ void Snail::findNearestCoin(LinkedList<Coin*>& Coins, double deltatime){
       int deltaX = getX() - minNode->getValue()->getX();
 
       double degree = atan(deltaY / deltaX) * (180 / M_PI);
-      Move(double(round(degree)) * 180, deltatime);
+      Move(double(round(degree)), deltatime);
     }
 }
 

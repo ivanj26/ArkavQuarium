@@ -10,8 +10,8 @@ using namespace std;
 string foods_move_gifs[10];
 string snail_move_gifs[20];
 string guppy_gifs[120];
-string PIRANHA_gifs[10];
-string coins_gifs[20];
+string PIRANHA_gifs[50];
+string coins_gifs[30];
 void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7], int &j, Aquarium& aquarium){
   clear_screen();
   /* Draw aquarium & menu_bar to screen*/
@@ -69,7 +69,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
 
   /* Update semua fish yang generate food dan coin*/
   for (int i = 0; i < aquarium.getFishes().getCurrentSize(); i++){
-    if (aquarium.getFishes().getHead()->getValue()->getID() == 0){
+    if (aquarium.getFishes().getIndex(i)->getID() == 0){
       Guppy *guppy = dynamic_cast<Guppy*> (aquarium.getFishes().getIndex(i));
 
       //Hunger time
@@ -80,7 +80,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       guppy->printFish(guppy_gifs);
 
       if (aquarium.getFoods().getCurrentSize() == 0 || guppy->getIsFull()){
-        if (guppy->getTimeDirection() <= 0){
+        if (guppy->getTimeDirection() <= 0 && guppy->getIsFull()){
           guppy->setTimeDirection(-1);
         } else {
           guppy->setTimeDirection(guppy->getTimeDirection() - 500);
@@ -103,12 +103,29 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
       delete guppy;
     } else {
       Piranha *piranha = dynamic_cast<Piranha*> (aquarium.getFishes().getIndex(i));
+
+      //Hunger time
+      if (piranha->getHungerTime() <= 0){
+        piranha->setIsFull(false);
+      }
+
       piranha->printFish(PIRANHA_gifs);
 
-      if (aquarium.getFoods().getCurrentSize() == 0 || piranha->getIsFull()){
+      if (aquarium.getFishes().getCurrentSize() == 0 || piranha->getIsFull()){
+        if (piranha->getTimeDirection() <= 0 && piranha->getIsFull()){
+          piranha->setTimeDirection(-1);
+        } else {
+          piranha->setTimeDirection(piranha->getTimeDirection() - 500);
+        }
+        piranha->setHungerTime(piranha->getHungerTime() - 100);
         piranha->Move(generateRandom(0,360), deltatime);
-      } else if (aquarium.getFoods().getCurrentSize() > 0 && !piranha->getIsFull()){
+      } else if (aquarium.getFishes().getCurrentSize() > 0 && !piranha->getIsFull()){
         piranha->findNearestFoodOrFish(aquarium.getFishes(), deltatime);
+      }
+
+      //generate coin
+      if (piranha->getEatAtLevel() != -999){
+        aquarium.getCoins().add(piranha->generateCoin());
       }
 
       piranha = nullptr;
@@ -145,6 +162,9 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
     aquarium.getSnail().findNearestCoin(aquarium.getCoins(), deltatime);
   }
 
+  Player::setMoney(aquarium.getSnail().getAmountCoin() + Player::getMoney());
+  aquarium.getSnail().setAmountCoin(0);
+
   update_screen();
 }
 
@@ -152,6 +172,7 @@ int main( int argc, char* args[] )
 {
     init();
 
+    bool win = false;
     bool running = true;
     double prevtime = time_since_start();
     bool unlockFish[] = {true, true, false, true, false, false, true};
@@ -208,7 +229,17 @@ int main( int argc, char* args[] )
       contains = strstr (pdir->d_name, gif);
       if (contains){
         int idx = int(pdir->d_name[11]) - 48;
-    		PIRANHA_gifs[idx] = DIR_PIRANHA + pdir->d_name;
+        if (int(pdir->d_name[1]) == 105){
+          PIRANHA_gifs[idx] = DIR_PIRANHA + pdir->d_name;
+        } else if (int(pdir->d_name[1]) == 106){
+          PIRANHA_gifs[idx+10] = DIR_PIRANHA + pdir->d_name;
+        } else if (int(pdir->d_name[1]) == 107){
+          PIRANHA_gifs[idx+20] = DIR_PIRANHA + pdir->d_name;
+        } else if (int(pdir->d_name[1]) == 108){
+          PIRANHA_gifs[idx+30] = DIR_PIRANHA + pdir->d_name;
+        } else if (int(pdir->d_name[1]) == 109){
+          PIRANHA_gifs[idx+40] = DIR_PIRANHA + pdir->d_name;
+        }
       }
   	}
 
@@ -248,8 +279,10 @@ int main( int argc, char* args[] )
 
         if (int(pdir->d_name[0]) == 83){
             coins_gifs[idx] = DIR_COINS + pdir->d_name;
-        } else {
+        } else if (int(pdir->d_name[0]) == 71){
             coins_gifs[idx+10] = DIR_COINS + pdir->d_name;
+        } else{
+            coins_gifs[idx+20] = DIR_COINS + pdir->d_name;
         }
       }
     }
@@ -261,6 +294,9 @@ int main( int argc, char* args[] )
     //Instantiate aquarium
     Aquarium aquarium;
     while (running) {
+        if (Player::getMoney() == 0 && aquarium.getFishes().getCurrentSize() == 0){
+          running = false;
+        }
         double now = time_since_start();
         double deltatime = now - prevtime;
         prevtime = now;
@@ -307,30 +343,40 @@ int main( int argc, char* args[] )
                       delete p;
                   }
                 } else if ((x_mouse <= x[6]+20 && x_mouse >= x[6]-20) && (y_mouse <= 45 && y_mouse >= 5) && unlockFish[6]){
-                  //Bila ingin membeli telur
-                  cout << "Buy egg!" << endl;
+                  switch (Player::getEggLevel()) {
+                    case 0:
+                      if (int(Player::getMoney()) >= PRC_EGG_1){
+                        Player::setMoney(Player::getMoney() - PRC_EGG_1);
+                        Player::setEggLevel(1);
+                      }
+                    break;
+                    case 1:
+                      if (int(Player::getMoney()) >= PRC_EGG_2){
+                        Player::setMoney(Player::getMoney() - PRC_EGG_1);
+                        Player::setEggLevel(2);
+                      }
+                    break;
+                    default:
+                      if (int(Player::getMoney()) >= PRC_EGG_3){
+                        running = false;
+                        win = true;
+                      }
+                  }
                 }
               break;
           }
         }
-
-        // // Proses masukan yang bersifat "tombol"
-        // for (auto key : get_tapped_keys()) {
-        //     switch (key) {
-        //     // r untuk reset
-        //     case SDLK_r:
-        //         cy = SCREEN_HEIGHT / 2;
-        //         cx = SCREEN_WIDTH / 2;
-        //         break;
-        //     // x untuk keluar
-        //     case SDLK_x:
-        //         running = false;
-        //         break;
-        //     }
-        // }
         SDL_Delay(120);
         updateAll(now, deltatime, unlockFish, x, i, aquarium);
     }
+
+    clear_screen();
+    if(win)
+      draw_text("You win!", 50, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 0, 0);
+    else
+      draw_text("You lose!", 50, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0, 0, 0);
+    update_screen();
+    SDL_Delay(2500);
     close();
 
     return 0;

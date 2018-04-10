@@ -3,7 +3,6 @@
 
 int Player::money = INIT_MONEY;
 int Player::eggLevel = 0;
-bool Player::gameOver = false;
 
 int Player::getMoney(){
   return money;
@@ -19,14 +18,6 @@ int Player::getEggLevel(){
 
 void Player::setEggLevel(int el){
   eggLevel = el;
-}
-
-bool Player::isGameOver(){
-  return gameOver;
-}
-
-void Player::setGameOver(bool go){
-  gameOver = go;
 }
 
 void Player::printMoney(){

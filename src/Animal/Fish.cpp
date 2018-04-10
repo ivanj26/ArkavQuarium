@@ -37,7 +37,7 @@ void Fish::Move(double degree, double deltatime){
 	  /*Spek gambar :
      * Ada menu bar yang tingginya 75px, maka batas bawah height jadi 75+40 = 115 (40 nilai tengah tinggi guppy), batas atas : SCREEN_HEIGHT- 40
      * sedangkan batas bawah lebar hanya nilai tengah guppy jadinya 40px, batas atas sama nilainya seperti batas atas tinggi*/
-     if (directionTo == -1){
+     if (directionTo == -1 || !getIsFull()){
        directionTo = degree;
      }
 

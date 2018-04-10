@@ -22,16 +22,16 @@ void Coin::Move(double deltatime){
 	bool isInsideY = ((location.y + int(SPEED_COIN_FOOD * deltatime * sin(M_PI / 180))) < SCREEN_HEIGHT - 40);
 
 	if (isInsideY){
-		location.y += 1;
+		location.y += int(SPEED_COIN_FOOD * deltatime * 10 * sin(M_PI / 180));
 	}
 } //Selalu move ke bawah
 
 /*Get & Set*/
-int Coin::getValue() const{
+long Coin::getValue() const{
 	return value;
 }
 
-void Coin::setValue(int val){
+void Coin::setValue(long val){
 	value = val;
 }
 

@@ -9,7 +9,7 @@ using namespace std;
 class Coin{
     private:
         int stateGambar;
-        int value;          //berapa besar nilai koinnya
+        long value;          //berapa besar nilai koinnya
         Location location;
     public:
         Coin();
@@ -18,8 +18,8 @@ class Coin{
         void Move(double deltatime); //Selalu move ke bawah
 
         /*Get & Set*/
-        int getValue() const;
-        void setValue(int);
+        long getValue() const;
+        void setValue(long);
         void printCoin(string[]);
         int getStateGambar();
         void setStateGambar(int);

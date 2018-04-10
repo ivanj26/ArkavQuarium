@@ -47,11 +47,11 @@ void Snail::setY(int y){location.y = y;}
 int Snail::getY()const{return location.y;}
 
 /*Get & Set amountCoin*/
-void Snail::setAmountCoin(int amountCoin){
+void Snail::setAmountCoin(long amountCoin){
   this->amountCoin = amountCoin;
 }
 
-int Snail::getAmountCoin()const{
+long Snail::getAmountCoin()const{
   return amountCoin;
 }
 
@@ -59,14 +59,14 @@ void Snail::findNearestCoin(LinkedList<Coin*>& Coins, double deltatime){
   Node<Coin*> *node = Coins.getHead();
   double tempMin = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
 
-  if (tempMin == 0){ //Coin tepat di posisi snail
+  if (tempMin <= 40){ //Coin tepat di posisi snail
     insertCoin(*node->getValue());
-    Coins.remove(node->getValue());
+    Coins.remove(0);
   } else {
       int i = 1;
       Node<Coin*> *minNode = Coins.getHead();
 
-      while (tempMin != 0 && i < Coins.getCurrentSize()){
+      while (i < Coins.getCurrentSize()){
         node = node->getNext();
         double temp = sqrt(pow(getX() - node->getValue()->getX(),2) + pow(getY() - node->getValue()->getY(),2));
         if (tempMin >  temp){

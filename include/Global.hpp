@@ -2,9 +2,9 @@
 #define GLOBAL_HPP
 
 #define INTERVAL_TIME_DIRECTION 2000
-#define SPEED_COIN_FOOD     80
+#define SPEED_COIN_FOOD     85
 #define SPEED_FISH_NORMAL   87
-#define SPEED_SNAIL         60
+#define SPEED_SNAIL         80
 #define SILVER 35
 #define GOLD 55
 #define PRC_GUPPY 100

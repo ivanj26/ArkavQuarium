@@ -47,11 +47,11 @@ void Snail::setY(int y){location.y = y;}
 int Snail::getY()const{return location.y;}
 
 /*Get & Set amountCoin*/
-void Snail::setAmountCoin(double amountCoin){
+void Snail::setAmountCoin(long amountCoin){
   this->amountCoin = amountCoin;
 }
 
-double Snail::getAmountCoin()const{
+long Snail::getAmountCoin()const{
   return amountCoin;
 }
 

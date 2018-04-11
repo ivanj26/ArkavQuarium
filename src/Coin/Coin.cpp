@@ -27,11 +27,11 @@ void Coin::Move(double deltatime){
 } //Selalu move ke bawah
 
 /*Get & Set*/
-double Coin::getValue() const{
+long Coin::getValue() const{
 	return value;
 }
 
-void Coin::setValue(double val){
+void Coin::setValue(long val){
 	value = val;
 }
 

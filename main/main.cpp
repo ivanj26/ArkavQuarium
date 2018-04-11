@@ -87,7 +87,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
           guppy->setTimeDirection(INTERVAL_TIME_DIRECTION);
           guppy->setDirectionTo(-1);
         } else {
-          guppy->setTimeDirection(guppy->getTimeDirection() - 500);
+          guppy->setTimeDirection(guppy->getTimeDirection() - 200);
         }
         guppy->setHungerTime(guppy->getHungerTime() - 100);
         guppy->Move(generateRandom(0,360), deltatime);
@@ -123,7 +123,7 @@ void updateAll(double now, double deltatime, bool (&unlockFish)[7], int (&x) [7]
           piranha->setTimeDirection(INTERVAL_TIME_DIRECTION);
           piranha->setDirectionTo(-1);
         } else {
-          piranha->setTimeDirection(piranha->getTimeDirection() - 500);
+          piranha->setTimeDirection(piranha->getTimeDirection() - 200);
         }
         piranha->setHungerTime(piranha->getHungerTime() - 100);
         piranha->Move(generateRandom(0,360), deltatime);

@@ -1,14 +1,14 @@
 #include "../include/Player.hpp"
 #include <string>
 
-int Player::money = INIT_MONEY;
+long Player::money = INIT_MONEY;
 int Player::eggLevel = 0;
 
-int Player::getMoney(){
+long Player::getMoney(){
   return money;
 }
 
-void Player::setMoney(int m){
+void Player::setMoney(long m){
   money = m;
 }
 

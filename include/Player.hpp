@@ -3,12 +3,12 @@
 
 class Player{
   private:
-      static int money;
+      static long money;
       static int eggLevel;
   public:
       static void setEggLevel(int);
       static int getEggLevel();
-      static int getMoney();
-      static void setMoney(int);
+      static long getMoney();
+      static void setMoney(long);
       static void printMoney();
 };

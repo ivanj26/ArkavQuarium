@@ -15,7 +15,7 @@ class Snail {
         double timeDirection;
         double directionTo;
         int stateGambar;
-        double amountCoin; //Banyaknya koin sekarang yang ditampung Snail
+        long amountCoin; //Banyaknya koin sekarang yang ditampung Snail
     public:
         Snail();
         Snail& operator=(const Snail&);//4 sekawan, untuk operator assignment
@@ -39,8 +39,8 @@ class Snail {
         double getDirectionTo();
         void setDirectionTo(double);
         /*Get & Set amountCoin*/
-        void setAmountCoin(double);
-        double getAmountCoin()const;
+        void setAmountCoin(long);
+        long getAmountCoin()const;
         void findNearestCoin(LinkedList<Coin*>&,double);
 };
 #endif
